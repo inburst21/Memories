@@ -13,7 +13,7 @@ import iskills.com.domain.repository.RepositoryMemory;
 public class UseCaseGetMatchingMemories {
     private RepositoryMemory repositoryMemory;
 
-    UseCaseGetMatchingMemories(RepositoryMemory repositoryImage) {
+    public UseCaseGetMatchingMemories(RepositoryMemory repositoryImage) {
         this.repositoryMemory = repositoryImage;
     }
 

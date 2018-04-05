@@ -16,14 +16,14 @@ public class UseCaseAddMemory {
         this.repositoryMemory = repositoryImage;
     }
 
-    public Completable add(Memory memory) { return validate(memory).andThen(repositoryMemory.addPhoto(memory)); }
+    public Completable add(Memory memory) { return validate(memory); }
 
     private Completable validate(Memory memory){
         if(!memory.isValid()){
             return Completable.error(new IllegalArgumentException("Memory failed validation"));
         }
         else {
-            return Completable.complete();
+            return Completable.complete().andThen(repositoryMemory.addPhoto(memory));
         }
     }
 }

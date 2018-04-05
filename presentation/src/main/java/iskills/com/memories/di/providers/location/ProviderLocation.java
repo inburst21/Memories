@@ -2,7 +2,6 @@ package iskills.com.memories.di.providers.location;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -11,18 +10,23 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import iskills.com.memories.MainActivity;
 
 
 /**
  * lennyhicks
  * 3/31/18
  */
-public class ProviderLocation extends Activity implements PresenterLocation {
-    private Context context;
+public class ProviderLocation implements PresenterLocation {
+    public MainActivity activity;
     private Observable<Location> currentLocation;
     private Address currentAddress;
     private LocationManager locationManager;
@@ -31,8 +35,12 @@ public class ProviderLocation extends Activity implements PresenterLocation {
     private Criteria criteria = new Criteria();
     private String[] requiredPermissions = new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION};
 
-    ProviderLocation(Context context) {
-        this.context = context;
+    private Listener listener;
+
+
+    @Inject
+    ProviderLocation(MainActivity mainActivity) {
+        this.activity = mainActivity;
         startModule();
     }
 
@@ -41,8 +49,12 @@ public class ProviderLocation extends Activity implements PresenterLocation {
         if (currentLocation == null || forceUpdate) {
             currentLocation = Observable.just(locationManager.getLastKnownLocation(provider));
             try {
-                if(Geocoder.isPresent()) {
-                    currentAddress = geocoder.getFromLocation(getCurrentLocation().getLatitude(), getCurrentLocation().getLongitude(), 1).get(0);
+                if (Geocoder.isPresent()) {
+                    List<Address> address = geocoder.getFromLocation(getCurrentLocation().getLatitude(), getCurrentLocation().getLongitude(), 1);
+                    if (address.size() > 0) {
+                        currentAddress = address.get(0);
+                        updateListeners();
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -50,9 +62,15 @@ public class ProviderLocation extends Activity implements PresenterLocation {
         }
     }
 
+    private void updateListeners() {
+        Log.d("test", "udating location");
+        if(listener != null)
+        listener.onLocationFound(currentAddress.getLatitude(), currentAddress.getLongitude(), getAddress());
+    }
+
     private Location getCurrentLocation() {
         if (currentLocation == null) {
-            getCurrentLocation(true);
+            getCurrentLocation(false);
         }
         return currentLocation.blockingSingle();
     }
@@ -77,17 +95,39 @@ public class ProviderLocation extends Activity implements PresenterLocation {
         return "Error getting Address";
     }
 
+    @Override
+    public void searchForLocation(CharSequence charSequence) {
+        if (Geocoder.isPresent()) {
+            List<Address> address = null;
+            try {
+                address = geocoder.getFromLocationName(charSequence.toString(), 1);
+                if (address.size() > 0) {
+                    currentAddress = address.get(0);
+                    updateListeners();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void listen(Listener listener) {
+        this.listener = listener;
+    }
+
     @SuppressLint("MissingPermission")
     private void startModule() {
         if (!checkPermissions()) {
-            ActivityCompat.requestPermissions(this, requiredPermissions, 1);
+            ActivityCompat.requestPermissions(activity, requiredPermissions, 1);
         } else if (checkPermissions()) {
-
-            locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+            geocoder = new Geocoder(activity);
+            locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
             // Gets best provider depending on criteria, @enabledOnly checks to make sure the provider is available
             if (locationManager != null) {
                 provider = locationManager.getBestProvider(criteria, true);
                 locationManager.getLastKnownLocation(provider);
+
             }
 
         }
@@ -95,13 +135,10 @@ public class ProviderLocation extends Activity implements PresenterLocation {
 
     private boolean checkPermissions() {
         for (String requiredPermission : requiredPermissions) {
-            if (ActivityCompat.checkSelfPermission(context, requiredPermission) != PackageManager.PERMISSION_GRANTED)
+            if (ActivityCompat.checkSelfPermission(activity, requiredPermission) != PackageManager.PERMISSION_GRANTED)
                 return false;
         }
         return true;
     }
 
-    public void setGeocoder(Activity activity){
-        geocoder = new Geocoder(activity);
-    }
 }

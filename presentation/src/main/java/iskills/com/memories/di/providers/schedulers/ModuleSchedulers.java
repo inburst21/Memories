@@ -1,4 +1,4 @@
-package iskills.com.memories.di;
+package iskills.com.memories.di.providers.schedulers;
 
 import javax.inject.Singleton;
 
@@ -15,7 +15,7 @@ import iskills.com.memories.di.qualifiers.UiThread;
  * 3/30/18
  */
 @Module
-class ModuleSchedulers {
+public class ModuleSchedulers {
 
     @Provides
     @UiThread

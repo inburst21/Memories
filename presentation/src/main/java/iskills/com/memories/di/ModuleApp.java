@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import iskills.com.memories.di.providers.location.ModuleLocation;
+import iskills.com.memories.di.providers.schedulers.ModuleSchedulers;
 import iskills.com.memories.utils.UtilsAndroid;
 
 /**
@@ -15,7 +15,9 @@ import iskills.com.memories.utils.UtilsAndroid;
  * 3/30/18
  */
 
-@Module(includes = {ModuleAppDb.class, ModuleLocation.class})
+@Module(includes = {
+        ModuleAppDb.class,
+        ModuleSchedulers.class})
 class ModuleApp {
 
     @Singleton

@@ -55,7 +55,8 @@ public class Memory {
     }
 
     public boolean isValid() {
-        return (imageBytes != null || !title.isEmpty() || !comment.isEmpty() || memoryDate != null || lat != null || lng != null);
+        System.out.println(imageBytes != null && !title.isEmpty() && !comment.isEmpty() && memoryDate != null && lat != null && lng != null);
+        return (imageBytes != null && !title.isEmpty() && !comment.isEmpty() && memoryDate != null && lat != null && lng != null);
     }
 
     public Calendar getTime() {

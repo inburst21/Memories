@@ -2,14 +2,13 @@ package iskills.com.memories.ui.addMemory;
 
 import dagger.Binds;
 import dagger.Module;
-import iskills.com.memories.di.ScopePerScreen;
-import iskills.com.memories.di.providers.location.ModuleLocation;
+import iskills.com.memories.di.scopes.ScopePerScreen;
 
 /**
  * lennyhicks
  * 3/30/18
  */
-@Module(includes = ModuleLocation.class)
+@Module
 public abstract class ModuleViewAddMemory {
 
     @Binds

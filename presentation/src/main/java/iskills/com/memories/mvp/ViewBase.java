@@ -8,7 +8,7 @@ import dagger.android.DaggerFragment;
  * lennyhicks
  * 4/1/18
  */
-public class ViewBase extends DaggerFragment implements BaseView {
+public abstract class ViewBase extends DaggerFragment implements BaseView {
 
     protected int captureRequest = 1;
     protected int loadRequest = 2;

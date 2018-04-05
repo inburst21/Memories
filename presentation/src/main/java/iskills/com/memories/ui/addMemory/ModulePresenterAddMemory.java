@@ -1,30 +1,18 @@
 package iskills.com.memories.ui.addMemory;
 
+import dagger.Binds;
 import dagger.Module;
-import dagger.Provides;
-import io.reactivex.Scheduler;
-import iskills.com.domain.repository.RepositoryMemory;
-import iskills.com.domain.usecases.UseCaseAddMemory;
-import iskills.com.memories.di.ScopePerScreen;
-import iskills.com.memories.di.qualifiers.MainThread;
-import iskills.com.memories.di.qualifiers.UiThread;
+import iskills.com.memories.di.scopes.ScopePerScreen;
 
 /**
  * lennyhicks
  * 3/30/18
  */
 @Module
-public class ModulePresenterAddMemory {
+public abstract class ModulePresenterAddMemory {
 
-    @Provides
+    @Binds
     @ScopePerScreen
-    UseCaseAddMemory providesUseCase(RepositoryMemory repositoryMemory){
-        return new UseCaseAddMemory(repositoryMemory);
-    }
+    abstract ContractAddMemory.Presenter providesPresenterAddMemory(PresenterAddMemory presenterAddMemory);
 
-    @Provides
-    @ScopePerScreen
-    PresenterAddMemory providesPresenterAddMemory(ContractAddMemory.View view, UseCaseAddMemory useCaseAddMemory, @MainThread Scheduler main, @UiThread Scheduler ui){
-        return new PresenterAddMemory(view, useCaseAddMemory, main, ui);
-    }
 }

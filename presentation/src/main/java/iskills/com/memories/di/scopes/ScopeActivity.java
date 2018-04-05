@@ -1,5 +1,6 @@
-package iskills.com.memories.di;
+package iskills.com.memories.di.scopes;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -7,10 +8,10 @@ import javax.inject.Scope;
 
 /**
  * lennyhicks
- * 3/30/18
+ * 4/5/18
  */
-
+@Documented
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ScopePerScreen {
+public @interface ScopeActivity {
 }

@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 
 import iskills.com.memories.ui.addMemory.ViewAddMemory;
+import iskills.com.memories.ui.allMemories.ViewGetAllMemories;
 
 /**
  * lennyhicks
@@ -20,7 +21,11 @@ public class AdapterMemoryViewPager extends android.support.v13.app.FragmentStat
     @Override
     public Fragment getItem(int position) {
 
-        return new ViewAddMemory();
+        switch (position) {
+            case 1 : return new ViewAddMemory();
+            case 2 : return new ViewGetAllMemories();
+            default: return new ViewGetAllMemories();
+        }
     }
 
     @Override

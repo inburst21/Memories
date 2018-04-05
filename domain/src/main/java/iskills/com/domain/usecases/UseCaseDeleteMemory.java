@@ -12,7 +12,7 @@ import iskills.com.domain.repository.RepositoryMemory;
 public class UseCaseDeleteMemory {
     private RepositoryMemory repositoryMemory;
 
-    UseCaseDeleteMemory(RepositoryMemory repositoryImage) {
+    public UseCaseDeleteMemory(RepositoryMemory repositoryImage) {
         this.repositoryMemory = repositoryImage;
     }
 

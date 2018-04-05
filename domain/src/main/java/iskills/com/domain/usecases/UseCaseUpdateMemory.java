@@ -11,12 +11,22 @@ import iskills.com.domain.repository.RepositoryMemory;
 public class UseCaseUpdateMemory {
     private RepositoryMemory repositoryMemory;
 
-    UseCaseUpdateMemory(RepositoryMemory repositoryImage) {
+    public UseCaseUpdateMemory(RepositoryMemory repositoryImage) {
         this.repositoryMemory = repositoryImage;
     }
 
     Completable update(Memory memory) {
-        return repositoryMemory.updateImage(memory);
+        return validate(memory);
+    }
+
+
+    private Completable validate(Memory memory){
+        if(!memory.isValid()){
+            return Completable.error(new IllegalArgumentException("Memory failed validation"));
+        }
+        else {
+            return Completable.complete().andThen(repositoryMemory.addPhoto(memory));
+        }
     }
 
 

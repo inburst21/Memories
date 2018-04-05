@@ -58,14 +58,5 @@ public class Utils {
         }
     }
 
-    public static Calendar getDateFromDatePicker(DatePicker datePicker){
-        int day = datePicker.getDayOfMonth();
-        int month = datePicker.getMonth();
-        int year =  datePicker.getYear();
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day);
-
-        return calendar;
-    }
 }

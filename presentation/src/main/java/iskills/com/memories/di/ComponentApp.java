@@ -19,17 +19,15 @@ import iskills.com.memories.ApplicationMemories;
 @Component(modules = {
         AndroidInjectionModule.class,
         ModuleApp.class,
-        ModuleSchedulers.class,
-        ModuleViews.class})
+        ModuleAndroid.class})
 public interface ComponentApp extends AndroidInjector<ApplicationMemories> {
+
     @Component.Builder
     interface Builder {
 
         @BindsInstance
         Builder application(Application application);
-
         ComponentApp build();
     }
-
 }
 
