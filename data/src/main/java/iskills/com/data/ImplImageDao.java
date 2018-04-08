@@ -24,13 +24,13 @@ public interface ImplImageDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertImage(EntityMemory imageEntity);
 
-    @Query("SELECT * FROM entitymemory")
-    List<EntityMemory> getAllImages();
+    @Query("SELECT * FROM memories")
+    Flowable<List<EntityMemory>> getAllImages();
 
-    @Query("SELECT * FROM entitymemory")
+    @Query("SELECT * FROM memories")
     Flowable<EntityMemory> getMatchingImage();
 
-    @Query("SELECT * FROM entitymemory WHERE id LIKE :id")
+    @Query("SELECT * FROM memories WHERE id LIKE :id")
     Single<EntityMemory> getMemoryById(Long id);
 
     @Update

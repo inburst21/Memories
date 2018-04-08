@@ -20,16 +20,16 @@ public class UseCaseAddOrUpdateMemory {
     }
 
 
-    private Completable validate(Memory memory){
-        if(!memory.isValid()){
+    private Completable validate(Memory memory) {
+        if (!memory.isValid()) {
             return Completable.error(new IllegalArgumentException("Memory failed validation"));
-        }
-        else {
-            if(repositoryMemory.getMemoryById(memory.id) != null) {
-                return Completable.complete().andThen(repositoryMemory.updateMemory(memory));
-            } else {
+        } else {
+            if(memory.id == null) {
                 return Completable.complete().andThen(repositoryMemory.addMemory(memory));
+            } else {
+                return Completable.complete().andThen(repositoryMemory.updateMemory(memory));
             }
+
         }
     }
 }

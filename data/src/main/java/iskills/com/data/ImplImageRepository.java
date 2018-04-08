@@ -1,14 +1,11 @@
 package iskills.com.data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.flowables.ConnectableFlowable;
-import iskills.com.data.entities.EntityMemory;
 import iskills.com.domain.model.Memory;
 import iskills.com.domain.repository.RepositoryMemory;
 
@@ -22,8 +19,6 @@ public class ImplImageRepository implements RepositoryMemory {
     private ImplImageDao implImageDao;
     private ImplMapper mapper;
 
-    private List<Memory> memoriesFresh = new ArrayList<>();
-
     public ImplImageRepository(ImplImageDao implImageDao, ImplMapper mapper) {
         this.implImageDao = implImageDao;
         this.mapper = mapper;
@@ -31,28 +26,16 @@ public class ImplImageRepository implements RepositoryMemory {
 
     @Override
     public Completable addMemory(final @NonNull Memory memory) {
-        EntityMemory entityMemory = null;
-        try {
-            entityMemory = mapper.toEntity.apply(memory);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        if (entityMemory != null) {
-            EntityMemory finalEntityMemory = entityMemory;
-            return Completable.fromAction(() ->
-                    implImageDao.insertImage(finalEntityMemory));
-        } else return Completable.error(new Exception());
+        return Completable.fromAction(() ->
+                implImageDao.insertImage(mapper.toEntity.apply(memory)));
+
     }
 
     @Override
-    public ConnectableFlowable<List<Memory>> getAllMemories() {
-        List<EntityMemory> entityMemories = implImageDao.getAllImages();
-
-        memoriesFresh = mapper.memoriesFromList(entityMemories);
-
-
-        return Flowable.fromArray(memoriesFresh).publish();
+    public Flowable<List<Memory>> getAllMemories() {
+        return implImageDao.getAllImages()
+                .map(list -> mapper.memoriesFromList(list));
     }
 
     @Override

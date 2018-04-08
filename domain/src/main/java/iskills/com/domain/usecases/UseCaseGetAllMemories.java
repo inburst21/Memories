@@ -1,9 +1,8 @@
 package iskills.com.domain.usecases;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.flowables.ConnectableFlowable;
+import io.reactivex.Flowable;
 import iskills.com.domain.model.Memory;
 import iskills.com.domain.repository.RepositoryMemory;
 
@@ -13,17 +12,14 @@ import iskills.com.domain.repository.RepositoryMemory;
  */
 public class UseCaseGetAllMemories {
     private RepositoryMemory repositoryMemory;
-    private List<Memory> memories1 = new ArrayList<>();
 
     public UseCaseGetAllMemories(RepositoryMemory repositoryImage) {
         this.repositoryMemory = repositoryImage;
     }
 
-    public ConnectableFlowable<List<Memory>> getAllMemories() {
+    public Flowable<List<Memory>> getAllMemories() {
         return repositoryMemory
-                .getAllMemories()
-                .autoConnect()
-                .replay();
+                .getAllMemories();
 
     }
 

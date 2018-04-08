@@ -8,16 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import iskills.com.data.DatabaseImage;
 import iskills.com.data.ImplMapper;
-import iskills.com.data.entities.EntityMemory;
 import iskills.com.domain.model.Memory;
 import iskills.com.memories.R;
 import iskills.com.memories.mvp.ViewBase;
@@ -35,11 +32,12 @@ public class ViewGetAllMemories extends ViewBase implements ContractGetAllMemori
     @Inject
     ImplMapper mapper;
 
+    @Inject
     AdapterMemoryGrid adapterMemoryGrid;
-    PresenterMemoryGrid memoryGrid;
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
 
 
     @Nullable
@@ -52,36 +50,20 @@ public class ViewGetAllMemories extends ViewBase implements ContractGetAllMemori
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-
-        memoryGrid = new PresenterMemoryGrid();
-
-        adapterMemoryGrid = new AdapterMemoryGrid(memoryGrid);
-
-
         recyclerView.setAdapter(adapterMemoryGrid);
-//
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-
-        updateList(new ArrayList<>());
+        presenterGetAllMemories.getAllMemories();
 
     }
 
     @Override
     public void updateList(List<Memory> memoryList) {
-        DatabaseImage image = DatabaseImage.getDatabase(getActivity());
-
-        List<EntityMemory> entityMemories = image.implImageDao().getAllImages();
-
-        List<Memory> memories = mapper.memoriesFromList(entityMemories);
-
-        memoryGrid.updateList(memories);
-
+        adapterMemoryGrid.getPresenterMemoryGrid().updateList(memoryList);
         adapterMemoryGrid.notifyDataSetChanged();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        presenterGetAllMemories.getAllMemories();
     }
 }

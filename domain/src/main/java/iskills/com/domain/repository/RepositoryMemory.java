@@ -10,7 +10,6 @@ import java.util.List;
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
-import io.reactivex.flowables.ConnectableFlowable;
 import iskills.com.domain.model.Memory;
 
 /**
@@ -21,7 +20,7 @@ public interface RepositoryMemory {
     Completable updateMemory(Memory memoryEntity);
     Completable deleteMemory(Memory memoryEntity);
 
-    ConnectableFlowable<List<Memory>> getAllMemories();
+    Flowable<List<Memory>> getAllMemories();
     Flowable<List<Memory>> getMatchingMemories(String title, String comment);
 
     Observable<Memory> getMemoryById(Long id);

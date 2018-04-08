@@ -23,7 +23,7 @@ class ModuleAppDb {
     @ScopeAndroid
     @Provides
     DatabaseImage providesImageDatabase(MainActivity context){
-        return Room.databaseBuilder(context, DatabaseImage.class, "imagedb").fallbackToDestructiveMigration().allowMainThreadQueries().build();
+        return Room.databaseBuilder(context, DatabaseImage.class, "imagedb").fallbackToDestructiveMigration().build();
     }
 
     @ScopeAndroid

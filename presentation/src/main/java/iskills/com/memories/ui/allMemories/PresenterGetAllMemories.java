@@ -1,15 +1,8 @@
 package iskills.com.memories.ui.allMemories;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Inject;
 
 import io.reactivex.Scheduler;
-import io.reactivex.flowables.ConnectableFlowable;
-import io.reactivex.subscribers.ResourceSubscriber;
-import iskills.com.data.DatabaseImage;
-import iskills.com.domain.model.Memory;
 import iskills.com.domain.usecases.UseCaseGetAllMemories;
 import iskills.com.memories.di.qualifiers.MainThread;
 import iskills.com.memories.di.qualifiers.UiThread;
@@ -36,47 +29,12 @@ public class PresenterGetAllMemories extends BasePresenter<ContractGetAllMemorie
 
     @Override
     public void getAllMemories() {
-
-        Memory memory = Memory.newBuilder()
-                .withMemoryDate(System.currentTimeMillis())
-                .withImageBytes(new byte[]{0, 0, 1, 1, 2, 4}).build();
-
-        ArrayList<Memory> memories = new ArrayList<>();
-
-        memories.add(memory);
-
-        view.updateList(memories);
-//        addDisposable(useCaseGetAllMemories.getAllMemories()
-        ConnectableFlowable<List<Memory>> memoryFlowable = useCaseGetAllMemories.getAllMemories();
-
-        memoryFlowable
+        addDisposable(useCaseGetAllMemories.getAllMemories()
                 .subscribeOn(main)
                 .observeOn(ui)
-                .subscribe(new ResourceSubscriber<List<Memory>>() {
+                .subscribe(list -> view.updateList(list),
+                        throwable -> view.showError(throwable.getLocalizedMessage())));
 
-                    @Override
-                    public void onNext(List<Memory> value) {
-                        view.updateList(value);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        view.showError(e.getLocalizedMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                        view.showError("eehehehehehhe");
-                    }
-                });
-
-        addDisposable(memoryFlowable.connect());
-
-//        useCaseGetAllMemories.getAllMemories()
-//                .subscribeOn(main)
-//                .observeOn(ui)
-//                .subscribe(memories -> view.updateList(memories));
     }
 }
 
