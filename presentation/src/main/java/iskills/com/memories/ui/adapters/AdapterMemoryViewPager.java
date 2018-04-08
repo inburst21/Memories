@@ -3,8 +3,11 @@ package iskills.com.memories.ui.adapters;
 import android.app.Fragment;
 import android.app.FragmentManager;
 
+import javax.inject.Inject;
+
 import iskills.com.memories.ui.addMemory.ViewAddMemory;
 import iskills.com.memories.ui.allMemories.ViewGetAllMemories;
+import iskills.com.memories.ui.editMemory.ViewEditMemory;
 
 /**
  * lennyhicks
@@ -14,7 +17,12 @@ public class AdapterMemoryViewPager extends android.support.v13.app.FragmentStat
 
     private int count = 3;
 
-    public AdapterMemoryViewPager(FragmentManager fm) {
+    ViewAddMemory viewAddMemory = new ViewAddMemory();
+    public ViewEditMemory viewEditMemory = new ViewEditMemory();
+    ViewGetAllMemories viewGetAllMemories = new ViewGetAllMemories();
+
+    @Inject
+    AdapterMemoryViewPager(FragmentManager fm) {
         super(fm);
     }
 
@@ -22,9 +30,15 @@ public class AdapterMemoryViewPager extends android.support.v13.app.FragmentStat
     public Fragment getItem(int position) {
 
         switch (position) {
-            case 1 : return new ViewAddMemory();
-            case 2 : return new ViewGetAllMemories();
-            default: return new ViewGetAllMemories();
+            case 0:
+                return viewAddMemory;
+            case 1:
+                return viewEditMemory;
+            case 2:
+                return viewGetAllMemories;
+
+            default:
+                return new Fragment();
         }
     }
 

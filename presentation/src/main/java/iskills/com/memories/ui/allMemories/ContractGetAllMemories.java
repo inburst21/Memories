@@ -9,9 +9,9 @@ import iskills.com.memories.mvp.BaseView;
  * lennyhicks
  * 4/1/18
  */
-public interface ContractGetAllMemories {
+interface ContractGetAllMemories {
     interface View extends BaseView {
-        void showMemories(List<Memory> memories);
+        void updateList(List<Memory> memories);
     }
 
     interface Presenter {

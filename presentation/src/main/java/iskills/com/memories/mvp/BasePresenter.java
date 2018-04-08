@@ -9,8 +9,8 @@ import io.reactivex.disposables.Disposable;
  */
 public class BasePresenter<V extends BaseView> implements IPresenter {
 
-    public V view;
-    CompositeDisposable disposables = new CompositeDisposable();
+    protected V view;
+    private CompositeDisposable disposables = new CompositeDisposable();
 
     protected BasePresenter(V view){
         this.view = view;

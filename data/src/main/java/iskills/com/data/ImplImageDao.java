@@ -9,9 +9,9 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
 import io.reactivex.Single;
 import iskills.com.data.entities.EntityMemory;
-import iskills.com.domain.repository.ImageDao;
 
 /**
  * lennyhicks
@@ -19,16 +19,19 @@ import iskills.com.domain.repository.ImageDao;
  */
 
 @Dao
-public interface ImplImageDao extends ImageDao {
+public interface ImplImageDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertImage(EntityMemory imageEntity);
 
-    @Query("SELECT * FROM images")
-    Single<List<EntityMemory>> getAllImages();
+    @Query("SELECT * FROM entitymemory")
+    List<EntityMemory> getAllImages();
 
-    @Query("SELECT * FROM images WHERE imageTitle LIKE :title AND imageComment LIKE :comment")
-    Single<List<EntityMemory>> getMatchingImage(String title, String comment);
+    @Query("SELECT * FROM entitymemory")
+    Flowable<EntityMemory> getMatchingImage();
+
+    @Query("SELECT * FROM entitymemory WHERE id LIKE :id")
+    Single<EntityMemory> getMemoryById(Long id);
 
     @Update
     void updateImage(EntityMemory imageEntity);

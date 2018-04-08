@@ -8,22 +8,28 @@ import iskills.com.domain.repository.RepositoryMemory;
  * lennyhicks
  * 3/30/18
  */
-
-public class UseCaseAddMemory {
+public class UseCaseAddOrUpdateMemory {
     private RepositoryMemory repositoryMemory;
 
-    public UseCaseAddMemory(RepositoryMemory repositoryImage){
+    public UseCaseAddOrUpdateMemory(RepositoryMemory repositoryImage) {
         this.repositoryMemory = repositoryImage;
     }
 
-    public Completable add(Memory memory) { return validate(memory); }
+    public Completable addOrUpdate(Memory memory) {
+        return validate(memory);
+    }
+
 
     private Completable validate(Memory memory){
         if(!memory.isValid()){
             return Completable.error(new IllegalArgumentException("Memory failed validation"));
         }
         else {
-            return Completable.complete().andThen(repositoryMemory.addPhoto(memory));
+            if(repositoryMemory.getMemoryById(memory.id) != null) {
+                return Completable.complete().andThen(repositoryMemory.updateMemory(memory));
+            } else {
+                return Completable.complete().andThen(repositoryMemory.addMemory(memory));
+            }
         }
     }
 }

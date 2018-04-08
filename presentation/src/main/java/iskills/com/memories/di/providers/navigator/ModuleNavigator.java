@@ -12,8 +12,8 @@ import iskills.com.memories.MainActivity;
 public class ModuleNavigator {
 
     @Provides
-    Navigator navigator(MainActivity activity){
-        return new Navigator(activity);
+    Navigator navigator(MainActivity mainActivity){
+        return new Navigator(mainActivity);
     }
 
 }

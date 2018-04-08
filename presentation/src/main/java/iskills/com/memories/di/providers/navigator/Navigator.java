@@ -1,40 +1,22 @@
 package iskills.com.memories.di.providers.navigator;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.support.annotation.Nullable;
 
 import iskills.com.memories.MainActivity;
-import iskills.com.memories.ui.addMemory.ViewAddMemory;
-import iskills.com.memories.ui.allMemories.ViewGetAllMemories;
 
 /**
  * lennyhicks
  * 4/4/18
  */
 public class Navigator {
-    private Activity activity;
+    private MainActivity mainActivity;
 
 
-    Navigator(MainActivity activity){
-        this.activity = activity;
+    Navigator(MainActivity mainActivity){
+        this.mainActivity = mainActivity;
     }
 
-    void toAddMemoriesScreen(){
-        Intent intent = new Intent(activity, ViewAddMemory.class);
-        activity.startActivity(intent);
+    public void toEditMemoriesScreen(boolean newPhoto, byte[] imageBytes, @Nullable Long imageId){
+        mainActivity.toEditMemoryScreen(newPhoto, imageBytes, imageId);
     }
-
-
-    void toAllMemoriesScreen(){
-        Intent intent = new Intent(activity, ViewGetAllMemories.class);
-        activity.startActivity(intent);
-    }
-
-
-    void toMapMemoryScreen(){
-        Intent intent = new Intent(activity, ViewAddMemory.class);
-        activity.startActivity(intent);
-    }
-
-
 }

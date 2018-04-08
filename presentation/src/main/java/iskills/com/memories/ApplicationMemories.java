@@ -11,7 +11,7 @@ import iskills.com.memories.di.DaggerComponentApp;
  */
 
 public class ApplicationMemories extends DaggerApplication {
-    ComponentApp componentApp;
+    private ComponentApp componentApp;
 
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {

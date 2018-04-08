@@ -3,11 +3,11 @@ package iskills.com.memories.di.providers.usecases;
 import dagger.Module;
 import dagger.Provides;
 import iskills.com.domain.repository.RepositoryMemory;
-import iskills.com.domain.usecases.UseCaseAddMemory;
+import iskills.com.domain.usecases.UseCaseAddOrUpdateMemory;
 import iskills.com.domain.usecases.UseCaseDeleteMemory;
 import iskills.com.domain.usecases.UseCaseGetAllMemories;
 import iskills.com.domain.usecases.UseCaseGetMatchingMemories;
-import iskills.com.domain.usecases.UseCaseUpdateMemory;
+import iskills.com.domain.usecases.UseCaseGetMemoryById;
 import iskills.com.memories.di.scopes.ScopeAndroid;
 
 /**
@@ -16,20 +16,16 @@ import iskills.com.memories.di.scopes.ScopeAndroid;
  */
 @Module
 public class ModuleUseCases {
-    @Provides
-    @ScopeAndroid
-    UseCaseAddMemory providesUseCase(RepositoryMemory repositoryMemory){
-        return new UseCaseAddMemory(repositoryMemory);
-    }
 
+    @ScopeAndroid
     @Provides
     UseCaseGetAllMemories providesGetAllMemories(RepositoryMemory repositoryMemory){
         return new UseCaseGetAllMemories(repositoryMemory);
     }
 
     @Provides
-    UseCaseUpdateMemory providesUpdateMemory(RepositoryMemory repositoryMemory){
-        return new UseCaseUpdateMemory(repositoryMemory);
+    UseCaseAddOrUpdateMemory providesUpdateMemory(RepositoryMemory repositoryMemory){
+        return new UseCaseAddOrUpdateMemory(repositoryMemory);
     }
 
     @Provides
@@ -40,6 +36,11 @@ public class ModuleUseCases {
     @Provides
     UseCaseGetMatchingMemories providesGetMatchingMemories(RepositoryMemory repositoryMemory){
         return new UseCaseGetMatchingMemories(repositoryMemory);
+    }
+
+    @Provides
+    UseCaseGetMemoryById providesGetMemoryById(RepositoryMemory repositoryMemory){
+        return new UseCaseGetMemoryById(repositoryMemory);
     }
 
 }

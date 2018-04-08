@@ -1,48 +1,41 @@
 package iskills.com.memories.di;
 
 import android.arch.persistence.room.Room;
-import android.content.Context;
-
-import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import iskills.com.data.DatabaseImage;
 import iskills.com.data.ImplImageDao;
-import iskills.com.data.ImplImageModelMapper;
 import iskills.com.data.ImplImageRepository;
+import iskills.com.data.ImplMapper;
 import iskills.com.domain.repository.RepositoryMemory;
+import iskills.com.memories.MainActivity;
+import iskills.com.memories.di.scopes.ScopeAndroid;
 
 /**
  * lennyhicks
  * 3/30/18
  */
 
-@Module
+@Module(includes = ModuleMappers.class)
 class ModuleAppDb {
 
-    @Singleton
+    @ScopeAndroid
     @Provides
-    DatabaseImage providesImageDatabase(Context context){
-        return Room.databaseBuilder(context, DatabaseImage.class, "imagedb").fallbackToDestructiveMigration().build();
+    DatabaseImage providesImageDatabase(MainActivity context){
+        return Room.databaseBuilder(context, DatabaseImage.class, "imagedb").fallbackToDestructiveMigration().allowMainThreadQueries().build();
     }
 
-    @Singleton
+    @ScopeAndroid
     @Provides
     ImplImageDao provideImageDao(DatabaseImage databaseImage){
         return databaseImage.implImageDao();
     }
 
-    @Singleton
+    @ScopeAndroid
     @Provides
-    ImplImageModelMapper providesImageModelMapper()
-    {
-        return new ImplImageModelMapper();
-    }
-
-    @Singleton
-    @Provides
-    RepositoryMemory provideImageRepository(ImplImageDao dao, ImplImageModelMapper modelMapper){
+    RepositoryMemory provideImageRepository(ImplImageDao dao, ImplMapper modelMapper){
         return new ImplImageRepository(dao, modelMapper);
     }
+
 }

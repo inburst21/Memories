@@ -14,7 +14,7 @@ import iskills.com.memories.MainActivity;
  * lennyhicks
  * 4/5/18
  */
-public class UtilsDate implements PresenterDate {
+class UtilsDate implements PresenterDate {
 
     private final MainActivity activity;
     private Calendar calendar = Calendar.getInstance();
@@ -27,15 +27,23 @@ public class UtilsDate implements PresenterDate {
     @Override
     public void openDatePicker(PresenterDate.Listener listener) {
         DatePickerDialog mDatePicker = new DatePickerDialog(activity,
-                (datePicker, year, month, day) -> {
-                    listener.onDatePickerSet(getDateFromDatePicker(datePicker));
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                (datePicker, year, month, day) -> listener.onDatePickerSet(getDateFromDatePicker(datePicker)), calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         mDatePicker.show();
     }
 
     @Override
     public String formatDate(Calendar calendar) {
         return SimpleDateFormat.getDateInstance().format(calendar.getTime());
+    }
+
+    @Override
+    public String getCurrentDate() {
+        return SimpleDateFormat.getDateInstance().format(calendar.getTime());
+    }
+
+    @Override
+    public Calendar getCurrentCalender() {
+        return calendar;
     }
 
     private Calendar getDateFromDatePicker(DatePicker datePicker){

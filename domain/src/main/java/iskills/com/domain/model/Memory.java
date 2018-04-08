@@ -8,11 +8,12 @@ import java.util.Calendar;
  */
 
 public class Memory {
+
     public Long id;
     public byte[] imageBytes;
-    public String title = "";
-    public String comment = "";
-    public Calendar memoryDate = Calendar.getInstance();
+    public String title;
+    public String comment;
+    public Calendar memoryDate;
     public String address;
     public Double lat;
     public Double lng;
@@ -20,100 +21,145 @@ public class Memory {
     public Memory() {
     }
 
-    public Memory(Long id, byte[] imageBytes, String title, String comment, long memoryDate, String address, Double lat, Double lng) {
-        this.id = id;
-        this.imageBytes = imageBytes;
-        this.title = title;
-        this.comment = comment;
-        this.setDate(memoryDate);
-        this.address = address;
-        this.lat = lat;
-        this.lng = lng;
-    }
-
-    public Memory(byte[] imageBytes, String title, String comment, long memoryDate, String address, Double lat, Double lng) {
-
-        this.imageBytes = imageBytes;
-        this.title = title;
-        this.comment = comment;
-        this.setDate(memoryDate);
-        this.address = address;
-        this.lat = lat;
-        this.lng = lng;
-    }
-
-    public byte[] getImageBytes() {
-        return imageBytes;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getComment() {
-        return comment;
+    private Memory(Builder builder) {
+        id = builder.id;
+        imageBytes = builder.imageBytes;
+        title = builder.title;
+        comment = builder.comment;
+        memoryDate = builder.memoryDate;
+        address = builder.address;
+        lat = builder.lat;
+        lng = builder.lng;
     }
 
     public boolean isValid() {
-        System.out.println(imageBytes != null && !title.isEmpty() && !comment.isEmpty() && memoryDate != null && lat != null && lng != null);
-        return (imageBytes != null && !title.isEmpty() && !comment.isEmpty() && memoryDate != null && lat != null && lng != null);
+        return (imageBytes != null
+                && title != null
+                && !title.isEmpty()
+                && comment != null
+                && !comment.isEmpty()
+                && memoryDate != null
+                && address != null);
     }
 
-    public Calendar getTime() {
-        return memoryDate;
+    public static Builder newBuilder() {
+        return new Builder();
     }
 
-    public double getLat() {
-        return lat;
-    }
+    /**
+     * {@code Memory} builder static inner class.
+     */
+    public static final class Builder {
+        private Long id;
+        private byte[] imageBytes;
+        private String title;
+        private String comment;
+        private Calendar memoryDate;
+        private String address;
+        private Double lat;
+        private Double lng;
 
-    public double getLng() {
-        return lng;
-    }
+        private Builder() {
+        }
 
-    public void setDate(long date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(date);
-        this.memoryDate = calendar;
-    }
+        /**
+         * Sets the {@code id} and returns a reference to this Builder so that the methods can be chained together.
+         *
+         * @param id the {@code id} to set
+         * @return a reference to this Builder
+         */
+        public Builder withId(Long id) {
+            this.id = id;
+            return this;
+        }
 
-    public Long getId() {
-        return id;
-    }
+        /**
+         * Sets the {@code imageBytes} and returns a reference to this Builder so that the methods can be chained together.
+         *
+         * @param imageBytes the {@code imageBytes} to set
+         * @return a reference to this Builder
+         */
+        public Builder withImageBytes(byte[] imageBytes) {
+            this.imageBytes = imageBytes;
+            return this;
+        }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+        /**
+         * Sets the {@code title} and returns a reference to this Builder so that the methods can be chained together.
+         *
+         * @param title the {@code title} to set
+         * @return a reference to this Builder
+         */
+        public Builder withTitle(String title) {
+            this.title = title;
+            return this;
+        }
 
-    public void setImageBytes(byte[] imageBytes) {
-        this.imageBytes = imageBytes;
-    }
+        /**
+         * Sets the {@code comment} and returns a reference to this Builder so that the methods can be chained together.
+         *
+         * @param comment the {@code comment} to set
+         * @return a reference to this Builder
+         */
+        public Builder withComment(String comment) {
+            this.comment = comment;
+            return this;
+        }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+        /**
+         * Sets the {@code memoryDate} and returns a reference to this Builder so that the methods can be chained together.
+         *
+         * @param memoryDate the {@code memoryDate} to set
+         * @return a reference to this Builder
+         */
+        public Builder withMemoryDate(long memoryDate) {
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(memoryDate);
+            this.memoryDate = calendar;
+            return this;
+        }
 
-    public Calendar getMemoryDate() {
-        return memoryDate;
-    }
+        /**
+         * Sets the {@code address} and returns a reference to this Builder so that the methods can be chained together.
+         *
+         * @param address the {@code address} to set
+         * @return a reference to this Builder
+         */
+        public Builder withAddress(String address) {
+            this.address = address;
+            return this;
+        }
 
-    public void setMemoryDate(Calendar memoryDate) {
-        this.memoryDate = memoryDate;
-    }
+        /**
+         * Sets the {@code lat} and returns a reference to this Builder so that the methods can be chained together.
+         *
+         * @param lat the {@code lat} to set
+         * @return a reference to this Builder
+         */
+        public Builder withLat(Double lat) {
+            this.lat = lat;
+            return this;
+        }
 
-    public void setLat(Double lat) {
-        this.lat = lat;
-    }
+        /**
+         * Sets the {@code lng} and returns a reference to this Builder so that the methods can be chained together.
+         *
+         * @param lng the {@code lng} to set
+         * @return a reference to this Builder
+         */
+        public Builder withLng(Double lng) {
+            this.lng = lng;
+            return this;
+        }
 
-    public void setLng(Double lng) {
-        this.lng = lng;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+        /**
+         * Returns a {@code Memory} built from the parameters previously set.
+         *
+         * @return a {@code Memory} built with parameters of this {@code Memory.Builder}
+         */
+        public Memory build() {
+            return new Memory(this);
+        }
     }
 }

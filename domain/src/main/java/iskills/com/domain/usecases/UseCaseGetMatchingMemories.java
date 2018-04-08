@@ -2,7 +2,7 @@ package iskills.com.domain.usecases;
 
 import java.util.List;
 
-import io.reactivex.Observable;
+import io.reactivex.Flowable;
 import iskills.com.domain.model.Memory;
 import iskills.com.domain.repository.RepositoryMemory;
 
@@ -17,7 +17,7 @@ public class UseCaseGetMatchingMemories {
         this.repositoryMemory = repositoryImage;
     }
 
-    Observable<List<Memory>> getMatchingMemories(final String title, final String comment) {
-        return repositoryMemory.getMatchingImage(title, comment);
+    Flowable<List<Memory>> getMatchingMemories(final String title, final String comment) {
+        return repositoryMemory.getMatchingMemories(title, comment);
     }
 }

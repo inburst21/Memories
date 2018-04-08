@@ -8,7 +8,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import iskills.com.memories.di.providers.schedulers.ModuleSchedulers;
-import iskills.com.memories.utils.UtilsAndroid;
 
 /**
  * lennyhicks
@@ -16,7 +15,6 @@ import iskills.com.memories.utils.UtilsAndroid;
  */
 
 @Module(includes = {
-        ModuleAppDb.class,
         ModuleSchedulers.class})
 class ModuleApp {
 
@@ -26,9 +24,5 @@ class ModuleApp {
         return application.getApplicationContext();
     }
 
-    @Singleton
-    @Provides
-    UtilsAndroid provideUtilsAndroid(Context context){
-        return new UtilsAndroid(context);
-    }
+
 }

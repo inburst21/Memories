@@ -8,16 +8,16 @@ import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 
 import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import iskills.com.memories.MainActivity;
 
 
@@ -25,9 +25,9 @@ import iskills.com.memories.MainActivity;
  * lennyhicks
  * 3/31/18
  */
-public class ProviderLocation implements PresenterLocation {
-    public MainActivity activity;
-    private Observable<Location> currentLocation;
+class ProviderLocation implements PresenterLocation, LocationListener {
+    private MainActivity activity;
+    private Location currentLocation;
     private Address currentAddress;
     private LocationManager locationManager;
     private Geocoder geocoder;
@@ -41,13 +41,12 @@ public class ProviderLocation implements PresenterLocation {
     @Inject
     ProviderLocation(MainActivity mainActivity) {
         this.activity = mainActivity;
-        startModule();
     }
 
     @SuppressLint("MissingPermission")
     private void getCurrentLocation(boolean forceUpdate) {
         if (currentLocation == null || forceUpdate) {
-            currentLocation = Observable.just(locationManager.getLastKnownLocation(provider));
+            currentLocation = locationManager.getLastKnownLocation(provider);
             try {
                 if (Geocoder.isPresent()) {
                     List<Address> address = geocoder.getFromLocation(getCurrentLocation().getLatitude(), getCurrentLocation().getLongitude(), 1);
@@ -60,19 +59,19 @@ public class ProviderLocation implements PresenterLocation {
                 e.printStackTrace();
             }
         }
+
     }
 
     private void updateListeners() {
-        Log.d("test", "udating location");
-        if(listener != null)
-        listener.onLocationFound(currentAddress.getLatitude(), currentAddress.getLongitude(), getAddress());
+        if (listener != null)
+            listener.onLocationFound(getCurrentLocation().getLatitude(), getCurrentLocation().getLongitude(), getAddress());
     }
 
     private Location getCurrentLocation() {
         if (currentLocation == null) {
             getCurrentLocation(false);
         }
-        return currentLocation.blockingSingle();
+        return currentLocation;
     }
 
     @Override
@@ -97,6 +96,7 @@ public class ProviderLocation implements PresenterLocation {
 
     @Override
     public void searchForLocation(CharSequence charSequence) {
+        if (charSequence.length() < 3) return;
         if (Geocoder.isPresent()) {
             List<Address> address = null;
             try {
@@ -114,6 +114,13 @@ public class ProviderLocation implements PresenterLocation {
     @Override
     public void listen(Listener listener) {
         this.listener = listener;
+        startModule();
+    }
+
+    @Override
+    public void tryToGetCurrentLocation() {
+        getCurrentLocation();
+        updateListeners();
     }
 
     @SuppressLint("MissingPermission")
@@ -126,7 +133,10 @@ public class ProviderLocation implements PresenterLocation {
             // Gets best provider depending on criteria, @enabledOnly checks to make sure the provider is available
             if (locationManager != null) {
                 provider = locationManager.getBestProvider(criteria, true);
-                locationManager.getLastKnownLocation(provider);
+                currentLocation = locationManager.getLastKnownLocation(provider);
+
+                locationManager.requestLocationUpdates(provider, 1000, 100, this);
+                tryToGetCurrentLocation();
 
             }
 
@@ -141,4 +151,24 @@ public class ProviderLocation implements PresenterLocation {
         return true;
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        currentLocation = location;
+        updateListeners();
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v13.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 
@@ -17,6 +18,9 @@ import iskills.com.memories.ui.adapters.AdapterMemoryViewPager;
 
 public class MainActivity extends DaggerActivity {
 
+    @Inject
+    AdapterMemoryViewPager adapterMemoryViewPager;
+
     @BindView(R.id.view_pager)
     ViewPager pager;
 
@@ -27,10 +31,11 @@ public class MainActivity extends DaggerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.setDebug(true);
         ButterKnife.bind(this);
-        pager.setAdapter(new AdapterMemoryViewPager(getFragmentManager()));
         checkPermissions();
+        pager.setAdapter(adapterMemoryViewPager);
+        pager.setOffscreenPageLimit(1);
+
     }
 
     private void checkPermissions() {
@@ -51,6 +56,18 @@ public class MainActivity extends DaggerActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        listener.onActivityResult(requestCode, resultCode, data.getData() != null ? data.getData().toString() : null);
+        listener.onActivityResult(requestCode, resultCode, (data != null) ? (data.getData().toString()) : null);
+    }
+
+    public void toEditMemoryScreen(boolean newPhoto, byte[] imageBytes, @Nullable  Long imageId) {
+        pager.setCurrentItem(2);
+        try {
+            Thread.sleep(500);
+
+            adapterMemoryViewPager.viewEditMemory.updateValues(newPhoto, imageBytes, imageId);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 }

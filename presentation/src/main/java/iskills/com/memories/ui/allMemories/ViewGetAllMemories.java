@@ -8,12 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import iskills.com.data.DatabaseImage;
+import iskills.com.data.ImplMapper;
+import iskills.com.data.entities.EntityMemory;
+import iskills.com.domain.model.Memory;
 import iskills.com.memories.R;
-import iskills.com.memories.di.qualifiers.QualAdapterMemoryGrid;
 import iskills.com.memories.mvp.ViewBase;
 import iskills.com.memories.ui.adapters.AdapterMemoryGrid;
 
@@ -23,11 +29,17 @@ import iskills.com.memories.ui.adapters.AdapterMemoryGrid;
  */
 public class ViewGetAllMemories extends ViewBase implements ContractGetAllMemories.View {
 
-    @Inject ContractGetAllMemories.Presenter presenterGetAllMemories;
-    @Inject @QualAdapterMemoryGrid AdapterMemoryGrid adapterMemoryGrid;
+    @Inject
+    ContractGetAllMemories.Presenter presenterGetAllMemories;
+
+    @Inject
+    ImplMapper mapper;
+
+    AdapterMemoryGrid adapterMemoryGrid;
+    PresenterMemoryGrid memoryGrid;
 
     @BindView(R.id.recycler_view)
-    public RecyclerView recyclerView;
+    RecyclerView recyclerView;
 
 
     @Nullable
@@ -41,13 +53,35 @@ public class ViewGetAllMemories extends ViewBase implements ContractGetAllMemori
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        memoryGrid = new PresenterMemoryGrid();
+
+        adapterMemoryGrid = new AdapterMemoryGrid(memoryGrid);
+
+
         recyclerView.setAdapter(adapterMemoryGrid);
-        presenterGetAllMemories.getAllMemories();
+//
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+
+        updateList(new ArrayList<>());
+
     }
 
     @Override
-    public void updateList() {
+    public void updateList(List<Memory> memoryList) {
+        DatabaseImage image = DatabaseImage.getDatabase(getActivity());
+
+        List<EntityMemory> entityMemories = image.implImageDao().getAllImages();
+
+        List<Memory> memories = mapper.memoriesFromList(entityMemories);
+
+        memoryGrid.updateList(memories);
+
         adapterMemoryGrid.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenterGetAllMemories.getAllMemories();
     }
 }

@@ -8,17 +8,21 @@ package iskills.com.domain.repository;
 import java.util.List;
 
 import io.reactivex.Completable;
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.flowables.ConnectableFlowable;
 import iskills.com.domain.model.Memory;
 
 /**
  * Repository interface to be implemented by Data layer.
  */
 public interface RepositoryMemory {
-    Completable addPhoto(Memory memory);
-    Completable updateImage(Memory memoryEntity);
-    Completable deleteImage(Memory memoryEntity);
+    Completable addMemory(Memory memory);
+    Completable updateMemory(Memory memoryEntity);
+    Completable deleteMemory(Memory memoryEntity);
 
-    Observable<List<Memory>> getAllImages();
-    Observable<List<Memory>> getMatchingImage(String title, String comment);
+    ConnectableFlowable<List<Memory>> getAllMemories();
+    Flowable<List<Memory>> getMatchingMemories(String title, String comment);
+
+    Observable<Memory> getMemoryById(Long id);
 }

@@ -14,6 +14,8 @@ public interface PresenterLocation  {
 
     void listen(Listener listener);
 
+    void tryToGetCurrentLocation();
+
     interface Listener {
         void onLocationFound(double lat, double lng, String address);
     }

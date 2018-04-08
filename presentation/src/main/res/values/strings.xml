@@ -5,4 +5,7 @@
     <string name="text_memory_location">Memory Location</string>
     <string name="text_memory_date">Memory Date</string>
     <string name="text_save_memory">Save Memory</string>
+    <string name="text_capture_photo">Capture Photo</string>
+    <string name="text_load_photo">Load Photo</string>
+    <string name="text_date">Date</string>
 </resources>

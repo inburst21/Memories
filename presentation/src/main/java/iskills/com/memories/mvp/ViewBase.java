@@ -26,4 +26,5 @@ public abstract class ViewBase extends DaggerFragment implements BaseView {
     private void showMessage(String msg) {
         Toast.makeText(getActivity().getBaseContext(), msg, Toast.LENGTH_SHORT).show();
     }
+
 }

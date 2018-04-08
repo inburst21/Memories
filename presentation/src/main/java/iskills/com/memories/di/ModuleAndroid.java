@@ -10,7 +10,9 @@ import iskills.com.memories.di.providers.fileProviders.ModuleFileUtils;
 import iskills.com.memories.di.providers.location.ModuleLocation;
 import iskills.com.memories.di.providers.navigator.ModuleNavigator;
 import iskills.com.memories.di.providers.usecases.ModuleUseCases;
+import iskills.com.memories.di.providers.utilsAndroid.ModuleUtilsAndroid;
 import iskills.com.memories.di.scopes.ScopeAndroid;
+import iskills.com.memories.ui.adapters.ModuleViewPager;
 
 /**
  * lennyhicks
@@ -28,8 +30,10 @@ abstract class ModuleAndroid {
             ModuleCamera.class,
             ModuleActivityResultListener.class,
             ModuleFileUtils.class,
+            ModuleUtilsAndroid.class,
+            ModuleViewPager.class,
+            ModuleAppDb.class,
             ModuleUseCases.class})
+
     abstract MainActivity mainActivity();
-
-
 }

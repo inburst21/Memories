@@ -17,7 +17,7 @@ import iskills.com.memories.di.providers.fileProviders.FileUtils;
  * lennyhicks
  * 4/5/18
  */
-public class UtilsCamera implements PresenterCamera {
+class UtilsCamera implements PresenterCamera {
 
     private int captureRequest = 1;
     private int loadRequest = 2;
@@ -38,11 +38,11 @@ public class UtilsCamera implements PresenterCamera {
 
     @Override
     public void openCamera(){
-        lastPhoto = fileUtils.getImageFile().getAbsoluteFile();
+        lastPhoto = fileUtils.getImageFile();
 
         lastPhotoUri = FileProvider.getUriForFile(activity,
                 BuildConfig.APPLICATION_ID + ".provider",
-                lastPhoto);
+                lastPhoto.getAbsoluteFile());
 
 
         Intent camera = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);

@@ -1,11 +1,7 @@
 package iskills.com.memories.ui.allMemories;
 
+import dagger.Binds;
 import dagger.Module;
-import dagger.Provides;
-import io.reactivex.Scheduler;
-import iskills.com.domain.usecases.UseCaseGetAllMemories;
-import iskills.com.memories.di.qualifiers.MainThread;
-import iskills.com.memories.di.qualifiers.UiThread;
 import iskills.com.memories.di.scopes.ScopePerScreen;
 
 /**
@@ -14,12 +10,10 @@ import iskills.com.memories.di.scopes.ScopePerScreen;
  */
 
 @Module
-public class ModulePresenterGetAllMemories {
+public abstract class ModulePresenterGetAllMemories {
 
-    @Provides
+    @Binds
     @ScopePerScreen
-    PresenterGetAllMemories providesPresenterAddMemory(ContractGetAllMemories.View view, UseCaseGetAllMemories useCaseGetAllMemories, @MainThread Scheduler main, @UiThread Scheduler ui) {
-        return new PresenterGetAllMemories(view, useCaseGetAllMemories, main, ui);
-    }
+    abstract ContractGetAllMemories.Presenter providesPresenterAddMemory(PresenterGetAllMemories presenterGetAllMemories);
 
 }
