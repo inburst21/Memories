@@ -13,6 +13,9 @@ import iskills.com.memories.ui.allMemories.ViewGetAllMemories;
 import iskills.com.memories.ui.editMemory.ModulePresenterEditMemory;
 import iskills.com.memories.ui.editMemory.ModuleViewEditMemory;
 import iskills.com.memories.ui.editMemory.ViewEditMemory;
+import iskills.com.memories.ui.map.ModulePresenterMap;
+import iskills.com.memories.ui.map.ModuleViewMap;
+import iskills.com.memories.ui.map.ViewMap;
 
 /**
  * lennyhicks
@@ -33,5 +36,9 @@ abstract class ModuleViews {
     @ScopePerScreen
     @ContributesAndroidInjector(modules = {ModuleViewEditMemory.class, ModulePresenterEditMemory.class})
     abstract ViewEditMemory viewEditMemory();
+
+    @ScopePerScreen
+    @ContributesAndroidInjector(modules = {ModuleViewMap.class, ModulePresenterMap.class})
+    abstract ViewMap viewMap();
 
 }

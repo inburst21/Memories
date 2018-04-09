@@ -20,6 +20,7 @@ public class FunctionToModel implements Function<EntityMemory, Memory> {
                 .withImageBytes(entityMemory.imageBytes)
                 .withMemoryDate(entityMemory.date)
                 .withLat(entityMemory.lat)
+                .withLng(entityMemory.lng)
                 .build();
     }
 }

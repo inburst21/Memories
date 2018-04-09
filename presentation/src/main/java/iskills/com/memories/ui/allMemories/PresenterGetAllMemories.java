@@ -2,10 +2,8 @@ package iskills.com.memories.ui.allMemories;
 
 import javax.inject.Inject;
 
-import io.reactivex.Scheduler;
 import iskills.com.domain.usecases.UseCaseGetAllMemories;
-import iskills.com.memories.di.qualifiers.MainThread;
-import iskills.com.memories.di.qualifiers.UiThread;
+import iskills.com.memories.di.providers.schedulers.ISchedulers;
 import iskills.com.memories.mvp.BasePresenter;
 
 /**
@@ -14,24 +12,22 @@ import iskills.com.memories.mvp.BasePresenter;
  */
 public class PresenterGetAllMemories extends BasePresenter<ContractGetAllMemories.View> implements ContractGetAllMemories.Presenter {
     private UseCaseGetAllMemories useCaseGetAllMemories;
-    private Scheduler main;
-    private Scheduler ui;
+    private final ISchedulers schedulers;
 
 
     @Inject
-    PresenterGetAllMemories(ContractGetAllMemories.View view, UseCaseGetAllMemories useCaseGetAllMemories, @MainThread Scheduler main, @UiThread Scheduler ui) {
+    PresenterGetAllMemories(ContractGetAllMemories.View view, UseCaseGetAllMemories useCaseGetAllMemories, ISchedulers schedulers) {
         super(view);
         this.useCaseGetAllMemories = useCaseGetAllMemories;
-        this.main = main;
-        this.ui = ui;
+        this.schedulers = schedulers;
     }
 
 
     @Override
     public void getAllMemories() {
         addDisposable(useCaseGetAllMemories.getAllMemories()
-                .subscribeOn(main)
-                .observeOn(ui)
+                .subscribeOn(schedulers.mainThread())
+                .observeOn(schedulers.uiThread())
                 .subscribe(list -> view.updateList(list),
                         throwable -> view.showError(throwable.getLocalizedMessage())));
 

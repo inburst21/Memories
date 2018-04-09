@@ -55,7 +55,7 @@ public class ViewEditMemory extends ViewBase implements ContractEditMemory.View 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
 //        presenter.showMemory();
     }
 

@@ -6,13 +6,11 @@ import java.util.Calendar;
 
 import javax.inject.Inject;
 
-import io.reactivex.Scheduler;
 import iskills.com.domain.model.Memory;
 import iskills.com.domain.usecases.UseCaseAddOrUpdateMemory;
 import iskills.com.memories.di.providers.date.PresenterDate;
 import iskills.com.memories.di.providers.location.PresenterLocation;
-import iskills.com.memories.di.qualifiers.MainThread;
-import iskills.com.memories.di.qualifiers.UiThread;
+import iskills.com.memories.di.providers.schedulers.ISchedulers;
 import iskills.com.memories.mvp.BasePresenter;
 
 /**
@@ -21,30 +19,22 @@ import iskills.com.memories.mvp.BasePresenter;
  */
 public class PresenterEditMemory extends BasePresenter<ContractEditMemory.View> implements ContractEditMemory.Presenter, PresenterDate.Listener, PresenterLocation.Listener {
 
-
     @Inject
     PresenterDate presenterDate;
 
-
     private Memory memory = new Memory();
-
-
     private PresenterLocation presenterLocation;
     private UseCaseAddOrUpdateMemory useCaseUpdateMemory;
-    private final Scheduler main;
-    private final Scheduler ui;
+    private final ISchedulers schedulers;
 
     @Inject
     PresenterEditMemory(ContractEditMemory.View view,
                         UseCaseAddOrUpdateMemory useCaseUpdateMemory,
-                        @MainThread Scheduler main,
-                        @UiThread Scheduler ui,
+                        ISchedulers schedulers,
                         PresenterLocation presenterLocation) {
         super(view);
         this.useCaseUpdateMemory = useCaseUpdateMemory;
-        this.main = main;
-        this.ui = ui;
-
+        this.schedulers = schedulers;
         this.presenterLocation = presenterLocation;
         this.presenterLocation.listen(this);
     }
@@ -52,8 +42,8 @@ public class PresenterEditMemory extends BasePresenter<ContractEditMemory.View> 
     @Override
     public void saveMemory() {
         addDisposable(useCaseUpdateMemory.addOrUpdate(memory)
-                .subscribeOn(main)
-                .observeOn(ui)
+                .subscribeOn(schedulers.mainThread())
+                .observeOn(schedulers.uiThread())
                 .subscribe(() -> view.showSuccess("Successful"),
                         throwable -> view.showError(throwable.getLocalizedMessage()))
         );
@@ -85,17 +75,6 @@ public class PresenterEditMemory extends BasePresenter<ContractEditMemory.View> 
     public void updateValues(boolean newPhoto, byte[] imageBytes, @Nullable Long imageId) {
         memory.imageBytes = imageBytes;
         view.loadImage(imageBytes);
-//        if (!newPhoto) addDisposable(useCaseGetMemoryById.getMemoryById(imageId)
-//                .subscribeOn(main)
-//                .observeOn(ui)
-//                .subscribe(memoryFrom -> memory = memoryFrom));
-//        else
-
-    }
-
-    @Override
-    public void showMemory() {
-        presenterLocation.listen(this);
     }
 
     @Override

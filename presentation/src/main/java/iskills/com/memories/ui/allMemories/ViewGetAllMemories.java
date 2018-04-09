@@ -14,7 +14,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import iskills.com.data.ImplMapper;
 import iskills.com.domain.model.Memory;
 import iskills.com.memories.R;
 import iskills.com.memories.mvp.ViewBase;
@@ -28,9 +27,6 @@ public class ViewGetAllMemories extends ViewBase implements ContractGetAllMemori
 
     @Inject
     ContractGetAllMemories.Presenter presenterGetAllMemories;
-
-    @Inject
-    ImplMapper mapper;
 
     @Inject
     AdapterMemoryGrid adapterMemoryGrid;
@@ -49,7 +45,7 @@ public class ViewGetAllMemories extends ViewBase implements ContractGetAllMemori
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         recyclerView.setAdapter(adapterMemoryGrid);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         presenterGetAllMemories.getAllMemories();

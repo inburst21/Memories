@@ -21,12 +21,10 @@ import iskills.com.memories.mvp.ViewBase;
 public class ViewAddMemory extends ViewBase implements ContractAddMemory.View {
 
     @Inject
-    public
-    ContractAddMemory.Presenter presenterAddMemory;
+    public ContractAddMemory.Presenter presenterAddMemory;
 
     @Inject
-    public
-    UtilsAndroid utilsAndroid;
+    public UtilsAndroid utilsAndroid;
 
     @Nullable
     @Override
@@ -38,7 +36,7 @@ public class ViewAddMemory extends ViewBase implements ContractAddMemory.View {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
     }
 
     @OnClick(R.id.buttonCapturePhoto)

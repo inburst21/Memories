@@ -10,11 +10,12 @@ import java.util.Calendar;
 public class Memory {
 
     public Long id;
-    public byte[] imageBytes;
     public String title;
     public String comment;
-    public Calendar memoryDate;
     public String address;
+
+    public byte[] imageBytes;
+    public Calendar memoryDate;
     public Double lat;
     public Double lng;
 

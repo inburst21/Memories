@@ -12,7 +12,7 @@ public class FunctionToEntity implements Function<Memory, EntityMemory> {
 
     @Override
     public EntityMemory apply(Memory memory) {
-        System.out.print(memory.address);
+        System.out.print(memory.lng + "testinggggggggggggggggg");
         EntityMemory.Builder builder = EntityMemory.newBuilder()
                 .withTitle(memory.title)
                 .withComment(memory.comment)

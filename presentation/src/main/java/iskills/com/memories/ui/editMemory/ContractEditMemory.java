@@ -33,7 +33,5 @@ interface ContractEditMemory {
 
         void updateValues(boolean newPhoto, byte[] imageBytes, @Nullable Long imageId);
 
-        void showMemory();
-
     }
 }

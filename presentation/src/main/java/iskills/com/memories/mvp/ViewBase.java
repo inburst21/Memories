@@ -2,6 +2,7 @@ package iskills.com.memories.mvp;
 
 import android.widget.Toast;
 
+import butterknife.Unbinder;
 import dagger.android.DaggerFragment;
 
 /**
@@ -12,6 +13,8 @@ public abstract class ViewBase extends DaggerFragment implements BaseView {
 
     protected int captureRequest = 1;
     protected int loadRequest = 2;
+
+    protected Unbinder unbinder;
 
     @Override
     public void showSuccess(String success) {
@@ -27,4 +30,9 @@ public abstract class ViewBase extends DaggerFragment implements BaseView {
         Toast.makeText(getActivity().getBaseContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }
