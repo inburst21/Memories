@@ -1,7 +1,9 @@
 package iskills.com.memoriesrefactor.screens.memoryactivity.addmemory;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,4 +47,9 @@ public class AddMemoryView extends BaseFragment implements ContractAddMemory.Vie
         presenterAddMemory.onLoadPhotoTapped();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("test ", requestCode + " testing");
+    }
 }

@@ -6,6 +6,7 @@ import android.support.design.widget.TextInputEditText;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import javax.inject.Inject;
@@ -46,6 +47,9 @@ public class ViewEditMemory extends BaseFragment implements ContractEditMemory.V
     @BindView(R.id.input_memory_date)
     TextInputEditText inputMemoryDate;
 
+    @BindView(R.id.button_delete_memory)
+    ImageButton deleteButton;
+
     public static String MEMORY_NEW = "memory_new";
     public static String MEMORY_BYTES = "memory_bytes";
     public static String MEMORY_ID = "memory_id";
@@ -60,11 +64,22 @@ public class ViewEditMemory extends BaseFragment implements ContractEditMemory.V
         return inflater.inflate(R.layout.fragment_edit_memory, container, false);
     }
 
+    public static ViewEditMemory newInstance(byte[] byteArrayExtra, long longExtra, boolean booleanExtra) {
+        Bundle bundle = new Bundle();
+        bundle.putByteArray(MEMORY_BYTES, byteArrayExtra);
+        bundle.putLong(MEMORY_ID, longExtra);
+        bundle.putBoolean(MEMORY_NEW, booleanExtra);
+
+        ViewEditMemory viewEditMemory = new ViewEditMemory();
+        viewEditMemory.setArguments(bundle);
+        return viewEditMemory;
+    }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
-        if(getArguments() != null) {
+        if (getArguments() != null) {
             isNew = getArguments().getBoolean(MEMORY_NEW);
             memoryBytes = getArguments().getByteArray(MEMORY_BYTES);
             memoryID = getArguments().getLong(MEMORY_ID);
@@ -77,6 +92,29 @@ public class ViewEditMemory extends BaseFragment implements ContractEditMemory.V
     public void loadImage(byte[] imageBytes) {
         imageView.setImageBitmap(utilsAndroid.getBitmapFromByteArray(imageBytes));
     }
+
+    @Override
+    public void setTitle(String title) {
+        inputMemoryTitle.setText(title);
+    }
+
+    @Override
+    public void setComment(String comment) {
+        inputMemoryComment.setText(comment);
+    }
+
+    @Override
+    public void showDeleteOption() {
+        deleteButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void dismiss() {
+        getActivity().finish();
+    }
+
+    @OnClick(R.id.button_delete_memory)
+    public void onDeleteTapped(){ presenter.onDeleteTapped(); }
 
     @OnClick(R.id.button_save_memory)
     public void onSaveMemory() {
@@ -110,8 +148,10 @@ public class ViewEditMemory extends BaseFragment implements ContractEditMemory.V
 
     @Override
     public void setAddress(String address) {
-        if(getView() != null) {
+        if (getView() != null) {
             getActivity().runOnUiThread(() -> inputMemoryLocation.setText(address));
         }
     }
+
+
 }

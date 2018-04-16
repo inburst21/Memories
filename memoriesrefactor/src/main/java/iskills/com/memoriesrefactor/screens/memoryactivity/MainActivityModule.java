@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 
 import dagger.Module;
 import dagger.Provides;
-import iskills.com.memoriesrefactor.di.services.navigator.ModuleNavigator;
+import iskills.com.memoriesrefactor.di.activity.utils.activityresult.ActivityResultModule;
 import iskills.com.memoriesrefactor.screens.adapters.AdapterMemoryViewPager;
 import iskills.com.memoriesrefactor.screens.memoryactivity.bottomnavigation.BottomNavigationViewModule;
 
@@ -13,7 +13,7 @@ import iskills.com.memoriesrefactor.screens.memoryactivity.bottomnavigation.Bott
  * lennyhicks
  * 4/15/18
  */
-@Module(includes = {BottomNavigationViewModule.class, ModuleNavigator.class, MainActivityFragments.class})
+@Module(includes = {BottomNavigationViewModule.class, MainActivityFragments.class, ActivityResultModule.class})
 public class MainActivityModule {
 
     @Provides

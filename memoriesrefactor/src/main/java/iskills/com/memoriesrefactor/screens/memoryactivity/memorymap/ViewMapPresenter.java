@@ -6,6 +6,7 @@ import io.reactivex.Flowable;
 import iskills.com.domain.model.Memory;
 import iskills.com.domain.usecases.UseCaseGetAllMemories;
 import iskills.com.memoriesrefactor.di.activity.utils.schedulers.PresenterScheduler;
+import iskills.com.memoriesrefactor.di.services.navigator.PresenterNavigator;
 
 /**
  * lennyhicks
@@ -16,13 +17,17 @@ public class ViewMapPresenter implements ContractMemoryMap.Presenter {
     private ContractMemoryMap.View view;
     private final UseCaseGetAllMemories useCaseGetAllMemories;
     private final PresenterScheduler schedulers;
+    private PresenterNavigator presenterNavigator;
 
     @Inject
-    ViewMapPresenter(ContractMemoryMap.View view, UseCaseGetAllMemories useCaseGetAllMemories, PresenterScheduler schedulers) {
+    ViewMapPresenter(ContractMemoryMap.View view,
+                     UseCaseGetAllMemories useCaseGetAllMemories,
+                     PresenterScheduler schedulers,
+                     PresenterNavigator presenterNavigator) {
         this.view = view;
         this.useCaseGetAllMemories = useCaseGetAllMemories;
         this.schedulers = schedulers;
-
+        this.presenterNavigator = presenterNavigator;
     }
 
     @Override
@@ -48,6 +53,6 @@ public class ViewMapPresenter implements ContractMemoryMap.Presenter {
 
     @Override
     public void onMemorySelected(long memoryId) {
-        view.showSuccess(memoryId + " selected");
+        presenterNavigator.openPreviewDialog(memoryId);
     }
 }

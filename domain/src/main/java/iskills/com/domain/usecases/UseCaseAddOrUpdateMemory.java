@@ -24,7 +24,7 @@ public class UseCaseAddOrUpdateMemory {
         if (!memory.isValid()) {
             return Completable.error(new IllegalArgumentException("Memory failed validation"));
         } else {
-            if(memory.id == null) {
+            if (memory.id == null) {
                 return Completable.complete().andThen(repositoryMemory.addMemory(memory));
             } else {
                 return Completable.complete().andThen(repositoryMemory.updateMemory(memory));

@@ -5,8 +5,8 @@ import dagger.Provides;
 import io.reactivex.functions.Function;
 import iskills.com.data.ImplMapper;
 import iskills.com.data.entities.EntityMemory;
-import iskills.com.data.funtions.FunctionToEntity;
-import iskills.com.data.funtions.FunctionToModel;
+import iskills.com.data.functions.FunctionToEntity;
+import iskills.com.data.functions.FunctionToModel;
 import iskills.com.domain.model.Memory;
 import iskills.com.memoriesrefactor.di.scopes.ApplicationScope;
 

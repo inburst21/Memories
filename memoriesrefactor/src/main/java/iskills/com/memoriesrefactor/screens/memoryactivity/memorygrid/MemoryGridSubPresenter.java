@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import iskills.com.domain.model.Memory;
 import iskills.com.memoriesrefactor.di.activity.utils.date.PresenterDate;
+import iskills.com.memoriesrefactor.di.services.navigator.PresenterNavigator;
 import iskills.com.memoriesrefactor.screens.adapters.ViewHolderMemory;
 
 /**
@@ -16,12 +17,14 @@ import iskills.com.memoriesrefactor.screens.adapters.ViewHolderMemory;
 public class MemoryGridSubPresenter {
 
     private PresenterDate utilsDate;
+    private PresenterNavigator presenterNavigator;
 
     private List<Memory> memories = new ArrayList<>();
 
     @Inject
-    public MemoryGridSubPresenter(PresenterDate utilsDate) {
+    public MemoryGridSubPresenter(PresenterDate utilsDate, PresenterNavigator presenterNavigator) {
         this.utilsDate = utilsDate;
+        this.presenterNavigator = presenterNavigator;
     }
 
 
@@ -30,6 +33,7 @@ public class MemoryGridSubPresenter {
     }
 
     public void onBindViewHolderMemory(ViewHolderMemory holder, int position) {
+
         Memory memory = memories.get(position);
         if (memory.imageBytes != null) {
             holder.setMemoryDate(utilsDate.formatDate(memories.get(position).memoryDate));
@@ -39,5 +43,9 @@ public class MemoryGridSubPresenter {
 
     public void updateList(List<Memory> memories) {
         this.memories = memories;
+    }
+
+    public void onMemoryTapped(int position) {
+        presenterNavigator.openPreviewDialog(memories.get(position).id);
     }
 }

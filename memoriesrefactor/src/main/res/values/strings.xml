@@ -11,4 +11,5 @@
     <string name="text_upload">Upload</string>
     <string name="text_memories">Memories</string>
     <string name="text_map">Map</string>
+    <string name="text_close_memory">Close</string>
 </resources>

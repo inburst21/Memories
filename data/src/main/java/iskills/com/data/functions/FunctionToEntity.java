@@ -1,4 +1,4 @@
-package iskills.com.data.funtions;
+package iskills.com.data.functions;
 
 import io.reactivex.functions.Function;
 import iskills.com.data.entities.EntityMemory;

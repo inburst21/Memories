@@ -76,6 +76,7 @@ public class ViewMap extends BaseFragment implements ContractMemoryMap.View, OnM
         if(googleMap == null) {
             setupMap();
         }
+
         mapView.onResume();
     }
 

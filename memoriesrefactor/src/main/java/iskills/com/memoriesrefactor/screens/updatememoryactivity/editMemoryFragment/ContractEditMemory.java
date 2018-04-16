@@ -17,6 +17,14 @@ interface ContractEditMemory {
 
         void loadImage(byte[] imageBytes);
 
+        void setTitle(String title);
+
+        void setComment(String comment);
+
+        void showDeleteOption();
+
+        void dismiss();
+
     }
 
     interface Presenter {
@@ -31,6 +39,8 @@ interface ContractEditMemory {
         void onLocationChanged(CharSequence charSequence);
 
         void updateValues(boolean newPhoto, byte[] imageBytes, @Nullable Long imageId);
+
+        void onDeleteTapped();
 
     }
 }

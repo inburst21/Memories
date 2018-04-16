@@ -32,6 +32,7 @@ public class AdapterMemoryGrid extends RecyclerView.Adapter<ViewHolderMemory> {
     @Override
     public void onBindViewHolder(ViewHolderMemory holder, int position) {
         presenterMemoryGrid.onBindViewHolderMemory(holder, position);
+        holder.itemView.setOnClickListener(__ ->  presenterMemoryGrid.onMemoryTapped(position));
     }
 
     @Override

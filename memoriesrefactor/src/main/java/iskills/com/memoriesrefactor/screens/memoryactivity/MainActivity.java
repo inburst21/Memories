@@ -1,6 +1,7 @@
 package iskills.com.memoriesrefactor.screens.memoryactivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -12,6 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerAppCompatActivity;
 import iskills.com.memoriesrefactor.R;
+import iskills.com.memoriesrefactor.di.activity.utils.activityresult.ActivityResultListener;
 import iskills.com.memoriesrefactor.screens.adapters.AdapterMemoryViewPager;
 
 public class MainActivity extends DaggerAppCompatActivity {
@@ -19,8 +21,11 @@ public class MainActivity extends DaggerAppCompatActivity {
     @BindView(R.id.container)
     ViewPager container;
 
+
     @Inject
     public AdapterMemoryViewPager viewPager;
+
+    @Inject ActivityResultListener listener;
 
     public ViewPager getContainer() {
         return container;
@@ -50,7 +55,12 @@ public class MainActivity extends DaggerAppCompatActivity {
         ButterKnife.bind(this);
         checkPermissions();
         container.setAdapter(viewPager);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        listener.onActivityResult(requestCode, resultCode, data.getData() != null ? data.getData().toString() : null);
     }
 
 }

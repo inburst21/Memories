@@ -1,6 +1,6 @@
 package iskills.com.memoriesrefactor.di.activity.utils.date;
 
-import android.app.Application;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.widget.DatePicker;
 
@@ -16,18 +16,18 @@ import javax.inject.Inject;
  */
 class UtilsDate implements PresenterDate {
 
-    private final Application application;
+    private final Activity activity;
     private Calendar calendar = Calendar.getInstance();
 
     @Inject
-    UtilsDate(Application application){
-        this.application = application;
+    UtilsDate(Activity application){
+        this.activity = application;
 
     }
 
     @Override
     public void openDatePicker(PresenterDate.Listener listener) {
-        DatePickerDialog mDatePicker = new DatePickerDialog(application,
+        DatePickerDialog mDatePicker = new DatePickerDialog(activity,
                 (datePicker, year, month, day) -> listener.onDatePickerSet(getDateFromDatePicker(datePicker)), calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         mDatePicker.show();    }
 

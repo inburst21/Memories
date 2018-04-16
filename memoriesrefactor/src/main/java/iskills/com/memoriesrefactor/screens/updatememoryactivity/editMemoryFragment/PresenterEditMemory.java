@@ -8,20 +8,27 @@ import javax.inject.Inject;
 
 import iskills.com.domain.model.Memory;
 import iskills.com.domain.usecases.UseCaseAddOrUpdateMemory;
+import iskills.com.domain.usecases.UseCaseDeleteMemory;
+import iskills.com.domain.usecases.UseCaseGetMemoryById;
 import iskills.com.memoriesrefactor.di.activity.utils.date.PresenterDate;
 import iskills.com.memoriesrefactor.di.activity.utils.location.PresenterLocation;
 import iskills.com.memoriesrefactor.di.activity.utils.schedulers.PresenterScheduler;
+import iskills.com.memoriesrefactor.di.services.navigator.CallbackDeleteDialog;
+import iskills.com.memoriesrefactor.di.services.navigator.PresenterNavigator;
 
 /**
  * lennyhicks
  * 4/5/18
  */
-public class PresenterEditMemory implements ContractEditMemory.Presenter, PresenterLocation.Listener, PresenterDate.Listener {
+public class PresenterEditMemory implements ContractEditMemory.Presenter, PresenterLocation.Listener, PresenterDate.Listener, CallbackDeleteDialog {
 
+    private UseCaseDeleteMemory useCaseDeleteMemory;
     @Inject
     PresenterDate presenterDate;
 
+    private UseCaseGetMemoryById useCaseGetMemoryById;
     PresenterLocation presenterLocation;
+    private PresenterNavigator presenterNavigator;
 
     private Memory memory = new Memory();
     private ContractEditMemory.View view;
@@ -31,24 +38,36 @@ public class PresenterEditMemory implements ContractEditMemory.Presenter, Presen
     @Inject
     PresenterEditMemory(ContractEditMemory.View view,
                         UseCaseAddOrUpdateMemory useCaseUpdateMemory,
+                        UseCaseGetMemoryById useCaseGetMemoryById,
+                        UseCaseDeleteMemory useCaseDeleteMemory,
+                        PresenterDate presenterDate,
                         PresenterLocation presenterLocation,
-                        PresenterScheduler schedulers) {
+                        PresenterScheduler schedulers,
+                        PresenterNavigator presenterNavigator) {
         this.view = view;
         this.useCaseUpdateMemory = useCaseUpdateMemory;
+        this.useCaseGetMemoryById = useCaseGetMemoryById;
+        this.useCaseDeleteMemory = useCaseDeleteMemory;
+        this.presenterDate = presenterDate;
         this.presenterLocation = presenterLocation;
+        this.presenterNavigator = presenterNavigator;
         this.presenterLocation.listen(this);
         this.schedulers = schedulers;
     }
 
+    @Override
     public void saveMemory() {
         useCaseUpdateMemory.addOrUpdate(memory)
                 .subscribeOn(schedulers.mainThread())
                 .observeOn(schedulers.uiThread())
-                .subscribe(() -> view.showSuccess("Successful"),
+                .subscribe(() -> {
+                            view.showSuccess("Successful");
+                            view.dismiss();
+                        },
                         throwable -> view.showError(throwable.getLocalizedMessage()));
     }
 
-
+    @Override
     public void onCommentChanged(CharSequence charSequence) {
         memory.comment = charSequence.toString();
     }
@@ -72,16 +91,34 @@ public class PresenterEditMemory implements ContractEditMemory.Presenter, Presen
 
     @Override
     public void updateValues(boolean newPhoto, byte[] imageBytes, @Nullable Long imageId) {
-        if (newPhoto){
+        if (newPhoto) {
             memory.memoryDate = Calendar.getInstance();
             view.setDate(presenterDate.formatDate(Calendar.getInstance()));
             presenterLocation.listen(this);
-
+            memory.id = null;
+            memory.imageBytes = imageBytes;
+            view.loadImage(memory.imageBytes);
+        } else {
+            useCaseGetMemoryById
+                    .getMemoryById(imageId)
+                    .subscribeOn(schedulers.mainThread())
+                    .observeOn(schedulers.uiThread())
+                    .subscribe(memoryFromRepo -> {
+                        memory = memoryFromRepo;
+                        view.setAddress(memory.address);
+                        view.setDate(presenterDate.formatDate(memory.memoryDate));
+                        view.setTitle(memory.title);
+                        view.setComment(memory.comment);
+                        view.showDeleteOption();
+                        view.loadImage(memory.imageBytes);
+                    });
         }
-        memory.id = imageId;
-        memory.imageBytes = imageBytes;
-        view.loadImage(imageBytes);
 
+    }
+
+    @Override
+    public void onDeleteTapped() {
+        presenterNavigator.showDeleteConfirmation(this);
     }
 
     @Override
@@ -96,5 +133,17 @@ public class PresenterEditMemory implements ContractEditMemory.Presenter, Presen
         memory.lat = lat;
         memory.lng = lng;
         view.setAddress(memory.address);
+    }
+
+    @Override
+    public void onDelete() {
+        useCaseDeleteMemory.delete(memory)
+                .subscribeOn(schedulers.mainThread())
+                .observeOn(schedulers.uiThread())
+                .subscribe(() -> {
+                            view.showSuccess("Deleted");
+                            view.dismiss();
+                        },
+                        throwable -> view.showError(throwable.getLocalizedMessage()));
     }
 }

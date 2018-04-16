@@ -8,6 +8,8 @@ import iskills.com.memoriesrefactor.screens.memoryactivity.memorygrid.MemoryGrid
 import iskills.com.memoriesrefactor.screens.memoryactivity.memorygrid.ViewMemoryGrid;
 import iskills.com.memoriesrefactor.screens.memoryactivity.memorymap.ViewMapModule;
 import iskills.com.memoriesrefactor.screens.memoryactivity.memorymap.ViewMap;
+import iskills.com.memoriesrefactor.screens.memoryactivity.memorypreviewdialog.MemoryPreviewDialog;
+import iskills.com.memoriesrefactor.screens.memoryactivity.memorypreviewdialog.MemoryPreviewModule;
 
 /**
  * lennyhicks
@@ -18,10 +20,13 @@ public abstract class MainActivityFragments {
     @ContributesAndroidInjector(modules = MemoryGridModule.class)
     abstract ViewMemoryGrid viewGetAllMemories();
 
-    @ContributesAndroidInjector(modules = {AddMemoryModule.class})
+    @ContributesAndroidInjector(modules = AddMemoryModule.class)
     abstract AddMemoryView viewAddMemory();
 
-    @ContributesAndroidInjector(modules = {ViewMapModule.class})
+    @ContributesAndroidInjector(modules = ViewMapModule.class)
     abstract ViewMap viewMap();
+
+    @ContributesAndroidInjector(modules = MemoryPreviewModule.class)
+    abstract MemoryPreviewDialog memoryPreviewDialog();
 
 }

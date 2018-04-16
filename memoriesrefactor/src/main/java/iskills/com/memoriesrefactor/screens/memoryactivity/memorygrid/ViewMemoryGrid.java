@@ -14,16 +14,16 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.support.DaggerFragment;
 import iskills.com.domain.model.Memory;
 import iskills.com.memoriesrefactor.R;
 import iskills.com.memoriesrefactor.screens.adapters.AdapterMemoryGrid;
+import iskills.com.memoriesrefactor.screens.common.fragments.BaseFragment;
 
 /**
  * lennyhicks
  * 4/1/18
  */
-public class ViewMemoryGrid extends DaggerFragment implements ContractGetAllMemories.View {
+public class ViewMemoryGrid extends BaseFragment implements ContractGetAllMemories.View {
 
     @Inject
     ContractGetAllMemories.Presenter presenterGetAllMemories;
@@ -57,18 +57,5 @@ public class ViewMemoryGrid extends DaggerFragment implements ContractGetAllMemo
         adapterMemoryGrid.notifyDataSetChanged();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
-    @Override
-    public void showSuccess(String success) {
-
-    }
-
-    @Override
-    public void showError(String error) {
-
-    }
 }

@@ -16,7 +16,7 @@ public class UseCaseDeleteMemory {
         this.repositoryMemory = repositoryImage;
     }
 
-    Completable delete(Memory memory) {
+    public Completable delete(Memory memory) {
         return repositoryMemory.deleteMemory(memory);
     }
 

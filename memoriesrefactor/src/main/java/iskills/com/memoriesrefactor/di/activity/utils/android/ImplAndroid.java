@@ -1,6 +1,7 @@
 package iskills.com.memoriesrefactor.di.activity.utils.android;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import javax.inject.Inject;
 
@@ -16,6 +17,6 @@ public class ImplAndroid implements PresenterAndroid {
 
     @Override
     public Bitmap getBitmapFromByteArray(byte[] imageBytes) {
-        return null;
+        return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
     }
 }
