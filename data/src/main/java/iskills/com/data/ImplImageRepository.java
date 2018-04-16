@@ -4,7 +4,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
 import iskills.com.domain.model.Memory;
 import iskills.com.domain.repository.RepositoryMemory;
@@ -26,7 +26,6 @@ public class ImplImageRepository implements RepositoryMemory {
 
     @Override
     public Completable addMemory(final @NonNull Memory memory) {
-
         return Completable.fromAction(() ->
                 implImageDao.insertImage(mapper.toEntity.apply(memory)));
 
@@ -39,17 +38,9 @@ public class ImplImageRepository implements RepositoryMemory {
     }
 
     @Override
-    public Flowable<List<Memory>> getMatchingMemories(String title, String comment) {
-        return implImageDao.getMatchingImage()
-                .map(mapper.toMemory)
-                .toList().toFlowable();
-    }
-
-    @Override
-    public Observable<Memory> getMemoryById(Long id) {
+    public Single<Memory> getMemoryById(Long id) {
         return implImageDao.getMemoryById(id)
-                .map(mapper.toMemory)
-                .toObservable();
+                .map(mapper.toMemory);
     }
 
 

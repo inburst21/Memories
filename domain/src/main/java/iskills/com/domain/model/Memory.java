@@ -19,6 +19,18 @@ public class Memory {
     public Double lat;
     public Double lng;
 
+    @Override
+    public String toString() {
+        return "Memory{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", comment='" + comment + '\'' +
+                ", address='" + address + '\'' +
+                ", lat=" + lat +
+                ", lng=" + lng +
+                '}';
+    }
+
     public Memory() {
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import iskills.com.domain.model.Memory;
 
 /**
@@ -17,11 +17,12 @@ import iskills.com.domain.model.Memory;
  */
 public interface RepositoryMemory {
     Completable addMemory(Memory memory);
+
     Completable updateMemory(Memory memoryEntity);
+
     Completable deleteMemory(Memory memoryEntity);
 
     Flowable<List<Memory>> getAllMemories();
-    Flowable<List<Memory>> getMatchingMemories(String title, String comment);
 
-    Observable<Memory> getMemoryById(Long id);
+    Single<Memory> getMemoryById(Long id);
 }

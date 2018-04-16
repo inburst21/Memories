@@ -1,6 +1,6 @@
 package iskills.com.domain.usecases;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import iskills.com.domain.model.Memory;
 import iskills.com.domain.repository.RepositoryMemory;
 
@@ -15,7 +15,7 @@ public class UseCaseGetMemoryById {
         this.repositoryMemory = repositoryImage;
     }
 
-    public Observable<Memory> getMemoryById(Long id) {
+    public Single<Memory> getMemoryById(Long id) {
         return repositoryMemory.getMemoryById(id);
     }
 }
