@@ -2,10 +2,9 @@ package iskills.com.memoriesrefactor.di.activity.utils.adapters;
 
 import dagger.Module;
 import dagger.Provides;
-import iskills.com.memoriesrefactor.di.activity.utils.date.PresenterDate;
 import iskills.com.memoriesrefactor.di.services.navigator.Navigator;
 import iskills.com.memoriesrefactor.screens.adapters.AdapterMemoryGrid;
-import iskills.com.memoriesrefactor.screens.memoryactivity.memorygrid.MemoryGridSubPresenter;
+import iskills.com.memoriesrefactor.screens.memoryactivity.memorygrid.MemoryGridAdapterPresenter;
 
 /**
  * lennyhicks
@@ -15,12 +14,12 @@ import iskills.com.memoriesrefactor.screens.memoryactivity.memorygrid.MemoryGrid
 public class ModuleAdapters {
 
     @Provides
-    MemoryGridSubPresenter presenterMemoryGrid(PresenterDate date, Navigator navigator){
-        return new MemoryGridSubPresenter(date, navigator);
+    MemoryGridAdapterPresenter presenterMemoryGrid(Navigator navigator){
+        return new MemoryGridAdapterPresenter(navigator);
     }
 
     @Provides
-    AdapterMemoryGrid adapterMemoryGrid(MemoryGridSubPresenter presenterMemoryGrid){
+    AdapterMemoryGrid adapterMemoryGrid(MemoryGridAdapterPresenter presenterMemoryGrid){
         return new AdapterMemoryGrid(presenterMemoryGrid);
     }
 }

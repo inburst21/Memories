@@ -18,6 +18,7 @@ public class UpdateMemoryModule {
     Activity activity(UpdateMemoryActivity activity){
         return activity;
     }
+
     @Provides
     FragmentManager fragmentManager(UpdateMemoryActivity activity){
         return activity.getSupportFragmentManager();

@@ -11,8 +11,8 @@ import dagger.Module;
 public abstract class AddMemoryModule {
 
     @Binds
-    abstract ContractAddMemory.View providesViewAddMemory(AddMemoryView addMemoryView);
+    abstract AddMemoryView providesViewAddMemory(AddMemoryFragment addMemoryView);
 
     @Binds
-    abstract ContractAddMemory.Presenter providesPresenterAddMemory(AddMemoryPresenter addMemoryPresenter);
+    abstract AddMemoryPresenter providesPresenterAddMemory(AddMemoryPresenterImpl addMemoryPresenter);
 }

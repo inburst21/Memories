@@ -19,43 +19,35 @@ import iskills.com.memoriesrefactor.R;
 import iskills.com.memoriesrefactor.screens.adapters.AdapterMemoryGrid;
 import iskills.com.memoriesrefactor.screens.common.fragments.BaseFragment;
 
-/**
- * lennyhicks
- * 4/1/18
- */
-public class ViewMemoryGrid extends BaseFragment implements ContractGetAllMemories.View {
+/** lennyhicks 4/1/18 */
+public class ViewMemoryGrid extends BaseFragment implements MemoryGridView {
 
-    @Inject
-    ContractGetAllMemories.Presenter presenterGetAllMemories;
+  @Inject protected MemoryGridPresenter presenterGetAllMemories;
 
-    @Inject
-    AdapterMemoryGrid adapterMemoryGrid;
+  @Inject protected AdapterMemoryGrid adapterMemoryGrid;
 
-    @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
+  @BindView(R.id.recycler_view)
+  protected RecyclerView recyclerView;
 
+  @Nullable
+  @Override
+  public View onCreateView(
+      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    return inflater.inflate(R.layout.fragment_memory_grid, container, false);
+  }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_memory_grid, container, false);
-    }
+  @Override
+  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    unbinder = ButterKnife.bind(this, view);
+    recyclerView.setAdapter(adapterMemoryGrid);
+    recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+    presenterGetAllMemories.getAllMemories();
+  }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
-        recyclerView.setAdapter(adapterMemoryGrid);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        presenterGetAllMemories.getAllMemories();
-
-    }
-
-    @Override
-    public void updateList(List<Memory> memoryList) {
-        adapterMemoryGrid.getPresenterMemoryGrid().updateList(memoryList);
-        adapterMemoryGrid.notifyDataSetChanged();
-    }
-
-
+  @Override
+  public void updateList(List<Memory> memoryList) {
+    adapterMemoryGrid.getPresenterMemoryGrid().updateList(memoryList);
+    adapterMemoryGrid.notifyDataSetChanged();
+  }
 }

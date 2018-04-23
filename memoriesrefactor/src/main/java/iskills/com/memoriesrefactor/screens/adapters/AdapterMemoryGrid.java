@@ -7,30 +7,30 @@ import android.view.ViewGroup;
 import javax.inject.Inject;
 
 import iskills.com.memoriesrefactor.R;
-import iskills.com.memoriesrefactor.screens.memoryactivity.memorygrid.MemoryGridSubPresenter;
+import iskills.com.memoriesrefactor.screens.memoryactivity.memorygrid.MemoryGridAdapterPresenter;
 
 
 /**
  * lennyhicks
  * 4/5/18
  */
-public class AdapterMemoryGrid extends RecyclerView.Adapter<ViewHolderMemory> {
+public class AdapterMemoryGrid extends RecyclerView.Adapter<MemoryHolderFragment> {
 
-    private MemoryGridSubPresenter presenterMemoryGrid;
+    private MemoryGridAdapterPresenter presenterMemoryGrid;
 
     @Inject
-    public AdapterMemoryGrid(MemoryGridSubPresenter presenterMemoryGrid) {
+    public AdapterMemoryGrid(MemoryGridAdapterPresenter presenterMemoryGrid) {
         this.presenterMemoryGrid = presenterMemoryGrid;
     }
 
     @Override
-    public ViewHolderMemory onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolderMemory(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_memory, parent, false));
+    public MemoryHolderFragment onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new MemoryHolderFragment(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_memory, parent, false));
 
     }
 
     @Override
-    public void onBindViewHolder(ViewHolderMemory holder, int position) {
+    public void onBindViewHolder(MemoryHolderFragment holder, int position) {
         presenterMemoryGrid.onBindViewHolderMemory(holder, position);
         holder.itemView.setOnClickListener(__ ->  presenterMemoryGrid.onMemoryTapped(position));
     }
@@ -40,7 +40,7 @@ public class AdapterMemoryGrid extends RecyclerView.Adapter<ViewHolderMemory> {
         return presenterMemoryGrid.getMemoryCount();
     }
 
-    public MemoryGridSubPresenter getPresenterMemoryGrid() {
+    public MemoryGridAdapterPresenter getPresenterMemoryGrid() {
         return presenterMemoryGrid;
     }
 }

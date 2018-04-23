@@ -8,6 +8,5 @@ public interface PresenterCamera {
     void openCamera();
     void loadGallery();
     byte[] onPhotoTakenResult();
-
     byte[] getImageBytes(String photoUri);
 }

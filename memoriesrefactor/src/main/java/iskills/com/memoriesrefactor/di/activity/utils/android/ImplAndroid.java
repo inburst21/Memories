@@ -17,6 +17,8 @@ public class ImplAndroid implements PresenterAndroid {
 
     @Override
     public Bitmap getBitmapFromByteArray(byte[] imageBytes) {
-        return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        final Bitmap[] bitmap = new Bitmap[1];
+        new Thread(() -> bitmap[0] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length)).run();
+        return bitmap[0];
     }
 }

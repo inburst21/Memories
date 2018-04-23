@@ -3,8 +3,7 @@ package iskills.com.memoriesrefactor.screens.updatememoryactivity;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import iskills.com.memoriesrefactor.screens.updatememoryactivity.editMemoryFragment.EditMemoryModule;
-import iskills.com.memoriesrefactor.screens.updatememoryactivity.editMemoryFragment.ViewEditMemory;
-import iskills.com.memoriesrefactor.screens.updatememoryactivity.handler.DeleteMemoryHandler;
+import iskills.com.memoriesrefactor.screens.updatememoryactivity.editMemoryFragment.EditMemoryFragment;
 
 /**
  * lennyhicks
@@ -14,8 +13,6 @@ import iskills.com.memoriesrefactor.screens.updatememoryactivity.handler.DeleteM
 public abstract class UpdateMemoryFragment {
 
     @ContributesAndroidInjector(modules = EditMemoryModule.class)
-    abstract ViewEditMemory activityEditMemory();
+    abstract EditMemoryFragment activityEditMemory();
 
-    @ContributesAndroidInjector
-    abstract DeleteMemoryHandler deleteMemoryHandler();
 }

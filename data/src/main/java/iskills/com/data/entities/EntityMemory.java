@@ -5,6 +5,9 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  * Room-specific Note Entity data type.
  */
@@ -100,8 +103,12 @@ public class EntityMemory {
          * @param date the {@code date} to set
          * @return a reference to this Builder
          */
-        public Builder withDate(long date) {
-            this.date = date;
+        public Builder withDate(String date) {
+            try {
+                this.date = SimpleDateFormat.getDateInstance().parse(date).getTime();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             return this;
         }
 

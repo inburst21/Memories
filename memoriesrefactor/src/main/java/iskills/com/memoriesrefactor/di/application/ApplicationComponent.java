@@ -8,7 +8,6 @@ import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 import iskills.com.memoriesrefactor.MemoriesApplication;
 import iskills.com.memoriesrefactor.di.activity.PresentationModule;
-import iskills.com.memoriesrefactor.di.application.usecase.UseCaseModule;
 import iskills.com.memoriesrefactor.di.scopes.ApplicationScope;
 
 /**
@@ -21,8 +20,7 @@ import iskills.com.memoriesrefactor.di.scopes.ApplicationScope;
         ApplicationModule.class,
         DatabaseModule.class,
         AndroidSupportInjectionModule.class,
-        PresentationModule.class,
-        UseCaseModule.class})
+        PresentationModule.class,})
 
 public interface ApplicationComponent extends AndroidInjector<MemoriesApplication> {
 

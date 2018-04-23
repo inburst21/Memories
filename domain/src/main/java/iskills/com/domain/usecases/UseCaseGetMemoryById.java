@@ -2,20 +2,20 @@ package iskills.com.domain.usecases;
 
 import io.reactivex.Single;
 import iskills.com.domain.model.Memory;
-import iskills.com.domain.repository.RepositoryMemory;
+import iskills.com.domain.repository.MemoryRepository;
 
 /**
  * lennyhicks
  * 4/6/18
  */
 public class UseCaseGetMemoryById {
-    private RepositoryMemory repositoryMemory;
+    private MemoryRepository memoryRepository;
 
-    public UseCaseGetMemoryById(RepositoryMemory repositoryImage) {
-        this.repositoryMemory = repositoryImage;
+    public UseCaseGetMemoryById(MemoryRepository repositoryImage) {
+        this.memoryRepository = repositoryImage;
     }
 
     public Single<Memory> getMemoryById(Long id) {
-        return repositoryMemory.getMemoryById(id);
+        return memoryRepository.getMemoryById(id);
     }
 }

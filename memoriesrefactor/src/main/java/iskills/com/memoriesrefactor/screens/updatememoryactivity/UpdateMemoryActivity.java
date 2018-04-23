@@ -5,7 +5,7 @@ import android.os.Bundle;
 import dagger.Module;
 import dagger.android.support.DaggerAppCompatActivity;
 import iskills.com.memoriesrefactor.R;
-import iskills.com.memoriesrefactor.screens.updatememoryactivity.editMemoryFragment.ViewEditMemory;
+import iskills.com.memoriesrefactor.screens.updatememoryactivity.editMemoryFragment.EditMemoryFragment;
 
 /**
  * lennyhicks
@@ -23,10 +23,10 @@ public class UpdateMemoryActivity extends DaggerAppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.container,
-                        ViewEditMemory.newInstance(
-                                getIntent().getByteArrayExtra(ViewEditMemory.MEMORY_BYTES),
-                                getIntent().getLongExtra(ViewEditMemory.MEMORY_ID, 0L),
-                                getIntent().getBooleanExtra(ViewEditMemory.MEMORY_NEW, false)))
+                        EditMemoryFragment.newInstance(
+                                getIntent().getByteArrayExtra(EditMemoryFragment.MEMORY_BYTES),
+                                getIntent().getLongExtra(EditMemoryFragment.MEMORY_ID, 0L),
+                                getIntent().getBooleanExtra(EditMemoryFragment.MEMORY_NEW, false)))
                 .commit();
     }
 }

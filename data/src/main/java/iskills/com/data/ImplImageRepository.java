@@ -7,14 +7,14 @@ import io.reactivex.Flowable;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
 import iskills.com.domain.model.Memory;
-import iskills.com.domain.repository.RepositoryMemory;
+import iskills.com.domain.repository.MemoryRepository;
 
 /**
  * lennyhicks
  * 3/30/18
  */
 
-public class ImplImageRepository implements RepositoryMemory {
+public class ImplImageRepository implements MemoryRepository {
 
     private ImplImageDao implImageDao;
     private ImplMapper mapper;

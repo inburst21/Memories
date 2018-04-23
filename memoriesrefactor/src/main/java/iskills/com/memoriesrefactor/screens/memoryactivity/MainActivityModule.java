@@ -6,27 +6,33 @@ import android.support.v4.app.FragmentManager;
 import dagger.Module;
 import dagger.Provides;
 import iskills.com.memoriesrefactor.di.activity.utils.activityresult.ActivityResultModule;
+import iskills.com.memoriesrefactor.di.services.navigator.ModuleNavigator;
 import iskills.com.memoriesrefactor.screens.adapters.AdapterMemoryViewPager;
-import iskills.com.memoriesrefactor.screens.memoryactivity.bottomnavigation.BottomNavigationViewModule;
+import iskills.com.memoriesrefactor.screens.memoryactivity.bottomnavigation.BottomNavigationModule;
 
-/**
- * lennyhicks
- * 4/15/18
- */
-@Module(includes = {BottomNavigationViewModule.class, MainActivityFragments.class, ActivityResultModule.class})
+/** lennyhicks 4/15/18 */
+@Module(
+  includes = {
+    BottomNavigationModule.class,
+    ModuleNavigator.class,
+    MainActivityFragments.class,
+    ActivityResultModule.class
+  }
+)
 public class MainActivityModule {
 
-    @Provides
-    Activity activity(MainActivity activity){
-        return activity;
-    }
-    @Provides
-    FragmentManager fragmentManager(MainActivity activity){
-        return activity.getSupportFragmentManager();
-    }
+  @Provides
+  Activity activity(MainActivity activity) {
+    return activity;
+  }
 
-    @Provides
-    AdapterMemoryViewPager getAdapter(FragmentManager fragmentManager){
-        return new AdapterMemoryViewPager(fragmentManager);
-    }
+  @Provides
+  FragmentManager fragmentManager(MainActivity activity) {
+    return activity.getSupportFragmentManager();
+  }
+
+  @Provides
+  AdapterMemoryViewPager getAdapter(FragmentManager fragmentManager) {
+    return new AdapterMemoryViewPager(fragmentManager);
+  }
 }

@@ -11,8 +11,8 @@ import dagger.Module;
 public abstract class EditMemoryModule {
 
     @Binds
-    abstract ContractEditMemory.View editMemoryView(ViewEditMemory viewEditMemory);
+    abstract EditMemoryView editMemoryView(EditMemoryFragment viewEditMemory);
 
     @Binds
-    abstract ContractEditMemory.Presenter presenterEditMemory(PresenterEditMemory presenterEditMemory);
+    abstract EditMemoryPresenter presenterEditMemory(PresenterEditMemory presenterEditMemory);
 }

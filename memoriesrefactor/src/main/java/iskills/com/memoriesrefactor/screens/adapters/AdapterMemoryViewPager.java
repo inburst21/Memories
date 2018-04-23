@@ -6,52 +6,46 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import javax.inject.Inject;
 
-import iskills.com.memoriesrefactor.screens.memoryactivity.addmemory.AddMemoryView;
+import iskills.com.memoriesrefactor.screens.memoryactivity.addmemory.AddMemoryFragment;
 import iskills.com.memoriesrefactor.screens.memoryactivity.memorygrid.ViewMemoryGrid;
-import iskills.com.memoriesrefactor.screens.memoryactivity.memorymap.ViewMap;
+import iskills.com.memoriesrefactor.screens.memoryactivity.memorymap.MemoryMapFragment;
 
-
-/**
- * lennyhicks
- * 3/30/18
- */
+/** lennyhicks 3/30/18 */
 public class AdapterMemoryViewPager extends FragmentStatePagerAdapter {
 
-    private int count = 3;
+  private final AddMemoryFragment addMemoryView = new AddMemoryFragment();
+  public static final int pageAddMemory = 0;
 
-    private AddMemoryView addMemoryView = new AddMemoryView();
-    public static final int pageAddMemory = 0;
+  private final ViewMemoryGrid viewGetAllMemories = new ViewMemoryGrid();
+  public static final int pageAllMemories = 1;
 
-    private ViewMemoryGrid viewGetAllMemories = new ViewMemoryGrid();
-    public static final int pageAllMemories = 1;
+  private final MemoryMapFragment viewMap = new MemoryMapFragment();
+  public static final int pageMap = 2;
 
-    private ViewMap viewMap = new ViewMap();
-    public static final int pageMap = 2;
+  @Inject
+  public AdapterMemoryViewPager(FragmentManager fm) {
+    super(fm);
+  }
 
+  @Override
+  public Fragment getItem(int position) {
 
-    @Inject
-    public AdapterMemoryViewPager(FragmentManager fm) {
-        super(fm);
+    switch (position) {
+      case pageAddMemory:
+        return addMemoryView;
+      case pageAllMemories:
+        return viewGetAllMemories;
+      case pageMap:
+        return viewMap;
+
+      default:
+        return new Fragment();
     }
+  }
 
-    @Override
-    public Fragment getItem(int position) {
-
-        switch (position) {
-            case pageAddMemory:
-                return addMemoryView;
-            case pageAllMemories:
-                return viewGetAllMemories;
-            case pageMap:
-                return viewMap;
-
-            default:
-                return new Fragment();
-        }
-    }
-
-    @Override
-    public int getCount() {
-        return count;
-    }
+  @Override
+  public int getCount() {
+    int count = 3;
+    return count;
+  }
 }

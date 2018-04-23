@@ -4,21 +4,21 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 import iskills.com.domain.model.Memory;
-import iskills.com.domain.repository.RepositoryMemory;
+import iskills.com.domain.repository.MemoryRepository;
 
 /**
  * lennyhicks
  * 3/30/18
  */
 public class UseCaseGetAllMemories {
-    private RepositoryMemory repositoryMemory;
+    private MemoryRepository memoryRepository;
 
-    public UseCaseGetAllMemories(RepositoryMemory repositoryImage) {
-        this.repositoryMemory = repositoryImage;
+    public UseCaseGetAllMemories(MemoryRepository repositoryImage) {
+        this.memoryRepository = repositoryImage;
     }
 
     public Flowable<List<Memory>> getAllMemories() {
-        return repositoryMemory
+        return memoryRepository
                 .getAllMemories();
 
     }

@@ -2,11 +2,12 @@ package iskills.com.memoriesrefactor.di.application.usecase;
 
 import dagger.Module;
 import dagger.Provides;
-import iskills.com.domain.repository.RepositoryMemory;
+import iskills.com.domain.repository.MemoryRepository;
 import iskills.com.domain.usecases.UseCaseAddOrUpdateMemory;
 import iskills.com.domain.usecases.UseCaseDeleteMemory;
 import iskills.com.domain.usecases.UseCaseGetAllMemories;
 import iskills.com.domain.usecases.UseCaseGetMemoryById;
+import iskills.com.domain.validators.MemoryValidator;
 
 /**
  * lennyhicks
@@ -16,23 +17,23 @@ import iskills.com.domain.usecases.UseCaseGetMemoryById;
 public class UseCaseModule {
 
     @Provides
-    public UseCaseGetAllMemories getAllMemories(RepositoryMemory repositoryMemory) {
-        return new UseCaseGetAllMemories(repositoryMemory);
+    public UseCaseGetAllMemories getAllMemories(MemoryRepository memoryRepository) {
+        return new UseCaseGetAllMemories(memoryRepository);
     }
 
     @Provides
-    public UseCaseAddOrUpdateMemory addOrUpdateMemory(RepositoryMemory repositoryMemory) {
-        return new UseCaseAddOrUpdateMemory(repositoryMemory);
+    public UseCaseAddOrUpdateMemory addOrUpdateMemory(MemoryRepository memoryRepository, MemoryValidator memoryValidator) {
+        return new UseCaseAddOrUpdateMemory(memoryRepository, memoryValidator);
     }
 
     @Provides
-    public UseCaseGetMemoryById useCaseGetMemoryById(RepositoryMemory repositoryMemory) {
-        return new UseCaseGetMemoryById(repositoryMemory);
+    public UseCaseGetMemoryById useCaseGetMemoryById(MemoryRepository memoryRepository) {
+        return new UseCaseGetMemoryById(memoryRepository);
     }
 
     @Provides
-    public UseCaseDeleteMemory useCaseDeleteMemory(RepositoryMemory repositoryMemory) {
-        return new UseCaseDeleteMemory(repositoryMemory);
+    public UseCaseDeleteMemory useCaseDeleteMemory(MemoryRepository memoryRepository) {
+        return new UseCaseDeleteMemory(memoryRepository);
     }
 
 }
