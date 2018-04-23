@@ -9,7 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 /**
- * Room-specific Note Entity data type.
+ * Room-specific Memory Entity data type.
  */
 @Entity(tableName = "memories")
 public class EntityMemory {
