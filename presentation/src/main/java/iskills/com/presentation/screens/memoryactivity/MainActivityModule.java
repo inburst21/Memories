@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import dagger.Module;
 import dagger.Provides;
 import iskills.com.presentation.di.activity.utils.activityresult.ActivityResultModule;
-import iskills.com.presentation.di.services.navigator.ModuleNavigator;
+import iskills.com.presentation.di.activity.navigator.ModuleNavigator;
 import iskills.com.presentation.screens.adapters.AdapterMemoryViewPager;
 import iskills.com.presentation.screens.memoryactivity.bottomnavigation.BottomNavigationModule;
 

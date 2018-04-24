@@ -1,6 +1,8 @@
-package iskills.com.presentation.di.services.navigator;
+package iskills.com.presentation.di.activity.navigator;
 
 import android.support.annotation.Nullable;
+
+import iskills.com.presentation.di.activity.utils.activityresult.CallbackDeleteDialog;
 
 /**
  * lennyhicks

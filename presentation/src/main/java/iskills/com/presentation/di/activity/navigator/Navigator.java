@@ -1,4 +1,4 @@
-package iskills.com.presentation.di.services.navigator;
+package iskills.com.presentation.di.activity.navigator;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 
 import javax.inject.Inject;
 
+import iskills.com.presentation.di.activity.utils.activityresult.CallbackDeleteDialog;
 import iskills.com.presentation.screens.adapters.AdapterMemoryViewPager;
 import iskills.com.presentation.screens.memoryactivity.MainActivity;
 import iskills.com.presentation.screens.memoryactivity.memorypreviewdialog.MemoryPreviewDialog;

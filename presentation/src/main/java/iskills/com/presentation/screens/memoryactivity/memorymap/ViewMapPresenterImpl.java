@@ -7,7 +7,7 @@ import iskills.com.domain.model.Memory;
 import iskills.com.domain.usecases.UseCaseGetAllMemories;
 import iskills.com.domain.validators.MapMemoryValidator;
 import iskills.com.presentation.di.application.schedulers.PresenterScheduler;
-import iskills.com.presentation.di.services.navigator.PresenterNavigator;
+import iskills.com.presentation.di.activity.navigator.PresenterNavigator;
 import iskills.com.presentation.screens.common.BasePresenter;
 
 /** lennyhicks 4/8/18 */

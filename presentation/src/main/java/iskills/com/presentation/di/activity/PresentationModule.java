@@ -7,7 +7,7 @@ import iskills.com.presentation.di.activity.utils.android.ModuleAndroid;
 import iskills.com.presentation.di.activity.utils.date.ModuleDate;
 import iskills.com.presentation.di.activity.utils.location.ModuleLocation;
 import iskills.com.presentation.di.scopes.ActivityScope;
-import iskills.com.presentation.di.services.navigator.ModuleNavigator;
+import iskills.com.presentation.di.activity.navigator.ModuleNavigator;
 import iskills.com.presentation.screens.memoryactivity.MainActivity;
 import iskills.com.presentation.screens.memoryactivity.MainActivityModule;
 import iskills.com.presentation.screens.memoryactivity.bottomnavigation.BottomNavigationModule;

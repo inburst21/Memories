@@ -13,8 +13,8 @@ import iskills.com.domain.usecases.UseCaseGetMemoryById;
 import iskills.com.presentation.di.activity.utils.date.PresenterDate;
 import iskills.com.presentation.di.activity.utils.location.PresenterLocation;
 import iskills.com.presentation.di.application.schedulers.PresenterScheduler;
-import iskills.com.presentation.di.services.navigator.CallbackDeleteDialog;
-import iskills.com.presentation.di.services.navigator.PresenterNavigator;
+import iskills.com.presentation.di.activity.utils.activityresult.CallbackDeleteDialog;
+import iskills.com.presentation.di.activity.navigator.PresenterNavigator;
 import iskills.com.presentation.screens.common.BasePresenter;
 
 /** lennyhicks 4/5/18 */

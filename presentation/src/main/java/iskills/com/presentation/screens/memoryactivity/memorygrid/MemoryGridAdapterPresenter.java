@@ -6,7 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import iskills.com.domain.model.Memory;
-import iskills.com.presentation.di.services.navigator.PresenterNavigator;
+import iskills.com.presentation.di.activity.navigator.PresenterNavigator;
 import iskills.com.presentation.screens.adapters.MemoryHolderFragment;
 
 /** lennyhicks 4/5/18 */

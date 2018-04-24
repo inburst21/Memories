@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import iskills.com.domain.model.Memory;
 import iskills.com.domain.usecases.UseCaseGetMemoryById;
 import iskills.com.presentation.di.application.schedulers.PresenterScheduler;
-import iskills.com.presentation.di.services.navigator.PresenterNavigator;
+import iskills.com.presentation.di.activity.navigator.PresenterNavigator;
 
 /** lennyhicks 4/16/18 */
 public class MemoryPreviewPresenterImpl implements MemoryPreviewPresenter {

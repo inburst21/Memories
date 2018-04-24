@@ -1,4 +1,4 @@
-package iskills.com.presentation.di.services.navigator;
+package iskills.com.presentation.di.activity.navigator;
 
 import dagger.Binds;
 import dagger.Module;

@@ -5,7 +5,7 @@ import javax.inject.Inject;
 
 import iskills.com.presentation.di.activity.utils.activityresult.ActivityResultListener;
 import iskills.com.presentation.di.activity.utils.camera.PresenterCamera;
-import iskills.com.presentation.di.services.navigator.PresenterNavigator;
+import iskills.com.presentation.di.activity.navigator.PresenterNavigator;
 import iskills.com.presentation.screens.common.BasePresenter;
 
 /** lennyhicks 3/30/18 */

@@ -2,7 +2,7 @@ package iskills.com.presentation.screens.memoryactivity.bottomnavigation;
 
 import javax.inject.Inject;
 
-import iskills.com.presentation.di.services.navigator.PresenterNavigator;
+import iskills.com.presentation.di.activity.navigator.PresenterNavigator;
 
 /** lennyhicks 4/14/18 */
 public class BottomNavigationPresenterImpl implements BottomNavigationPresenter {
