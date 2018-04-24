@@ -45,23 +45,6 @@ public class MemoryMapFragment extends BaseFragment implements MemoryMapView, On
     unbinder = ButterKnife.bind(this, view);
   }
 
-  private void setupMap() {
-    mapView.onCreate(getArguments());
-    mapView.getMapAsync(this);
-  }
-
-  @SuppressLint("MissingPermission")
-  private void setupMapOptions() {
-    googleMap.getUiSettings().setMyLocationButtonEnabled(true);
-    googleMap.getUiSettings().setZoomControlsEnabled(true);
-    checkPermissions(Manifest.permission.ACCESS_FINE_LOCATION);
-    checkPermissions(Manifest.permission.ACCESS_COARSE_LOCATION);
-    
-    googleMap.setMyLocationEnabled(true);
-    googleMap.setOnInfoWindowClickListener(
-        marker -> presenter.onMemorySelected((long) marker.getTag()));
-  }
-
   @Override
   public void onResume() {
     super.onResume();
@@ -79,6 +62,22 @@ public class MemoryMapFragment extends BaseFragment implements MemoryMapView, On
 
     mapView.post(() -> googleMap.addMarker(options).setTag(id));
     mapView.post(() -> googleMap.animateCamera(cameraUpdate));
+  }
+  private void setupMap() {
+    mapView.onCreate(getArguments());
+    mapView.getMapAsync(this);
+  }
+
+  @SuppressLint("MissingPermission")
+  private void setupMapOptions() {
+    googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+    googleMap.getUiSettings().setZoomControlsEnabled(true);
+    checkPermissions(Manifest.permission.ACCESS_FINE_LOCATION);
+    checkPermissions(Manifest.permission.ACCESS_COARSE_LOCATION);
+
+    googleMap.setMyLocationEnabled(true);
+    googleMap.setOnInfoWindowClickListener(
+            marker -> presenter.onMemorySelected((long) marker.getTag()));
   }
 
   @Override

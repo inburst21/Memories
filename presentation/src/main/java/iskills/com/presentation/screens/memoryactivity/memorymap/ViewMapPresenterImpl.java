@@ -11,8 +11,7 @@ import iskills.com.presentation.di.activity.navigator.PresenterNavigator;
 import iskills.com.presentation.screens.common.BasePresenter;
 
 /** lennyhicks 4/8/18 */
-public class ViewMapPresenterImpl extends BasePresenter<MemoryMapView>
-    implements MemoryMapPresenter {
+public class ViewMapPresenterImpl extends BasePresenter<MemoryMapView> implements MemoryMapPresenter {
 
   private final UseCaseGetAllMemories useCaseGetAllMemories;
   private final SchedulerPresenter schedulers;
