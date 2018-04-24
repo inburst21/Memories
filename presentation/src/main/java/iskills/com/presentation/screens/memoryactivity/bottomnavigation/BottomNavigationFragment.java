@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 import iskills.com.presentation.R;
 import iskills.com.presentation.screens.common.fragments.BaseFragment;
 
-/**
+/**$
  * lennyhicks
  * 4/14/18
  */

@@ -4,8 +4,8 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import iskills.com.presentation.screens.memoryactivity.addmemory.AddMemoryFragment;
 import iskills.com.presentation.screens.memoryactivity.addmemory.AddMemoryModule;
+import iskills.com.presentation.screens.memoryactivity.memorygrid.MemoryGridFragment;
 import iskills.com.presentation.screens.memoryactivity.memorygrid.MemoryGridModule;
-import iskills.com.presentation.screens.memoryactivity.memorygrid.ViewMemoryGrid;
 import iskills.com.presentation.screens.memoryactivity.memorymap.MemoryMapFragment;
 import iskills.com.presentation.screens.memoryactivity.memorymap.MemoryMapModule;
 import iskills.com.presentation.screens.memoryactivity.memorypreviewdialog.MemoryPreviewDialog;
@@ -15,7 +15,7 @@ import iskills.com.presentation.screens.memoryactivity.memorypreviewdialog.Memor
 @Module
 public abstract class MainActivityFragments {
   @ContributesAndroidInjector(modules = MemoryGridModule.class)
-  abstract ViewMemoryGrid viewGetAllMemories();
+  abstract MemoryGridFragment viewGetAllMemories();
 
   @ContributesAndroidInjector(modules = AddMemoryModule.class)
   abstract AddMemoryFragment viewAddMemory();

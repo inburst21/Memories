@@ -20,7 +20,7 @@ import iskills.com.presentation.screens.adapters.MemoryGridAdapter;
 import iskills.com.presentation.screens.common.fragments.BaseFragment;
 
 /** lennyhicks 4/1/18 */
-public class ViewMemoryGrid extends BaseFragment implements MemoryGridView {
+public class MemoryGridFragment extends BaseFragment implements MemoryGridView {
 
   @Inject protected MemoryGridPresenter presenterGetAllMemories;
 

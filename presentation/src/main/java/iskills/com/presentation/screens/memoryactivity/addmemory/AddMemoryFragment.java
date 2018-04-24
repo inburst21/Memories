@@ -14,7 +14,7 @@ import iskills.com.presentation.R;
 import iskills.com.presentation.screens.common.fragments.BaseFragment;
 
 /**
- * lennyhicks
+ * lennyhicks$
  * 3/30/18
  */
 public class AddMemoryFragment extends BaseFragment implements AddMemoryView {

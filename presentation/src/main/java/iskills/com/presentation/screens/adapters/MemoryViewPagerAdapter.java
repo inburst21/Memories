@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import javax.inject.Inject;
 
 import iskills.com.presentation.screens.memoryactivity.addmemory.AddMemoryFragment;
-import iskills.com.presentation.screens.memoryactivity.memorygrid.ViewMemoryGrid;
+import iskills.com.presentation.screens.memoryactivity.memorygrid.MemoryGridFragment;
 import iskills.com.presentation.screens.memoryactivity.memorymap.MemoryMapFragment;
 
 /** lennyhicks 3/30/18 */
@@ -16,7 +16,7 @@ public class MemoryViewPagerAdapter extends FragmentStatePagerAdapter {
   private final AddMemoryFragment addMemoryView = new AddMemoryFragment();
   public static final int pageAddMemory = 0;
 
-  private final ViewMemoryGrid viewGetAllMemories = new ViewMemoryGrid();
+  private final MemoryGridFragment viewGetAllMemories = new MemoryGridFragment();
   public static final int pageAllMemories = 1;
 
   private final MemoryMapFragment viewMap = new MemoryMapFragment();

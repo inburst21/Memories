@@ -8,7 +8,7 @@ import dagger.Module;
 public abstract class MemoryGridModule {
 
   @Binds
-  abstract MemoryGridView providesViewAddMemory(ViewMemoryGrid viewAddMemory);
+  abstract MemoryGridView providesViewAddMemory(MemoryGridFragment viewAddMemory);
 
   @Binds
   abstract MemoryGridPresenter providesPresenterAddMemory(
