@@ -12,7 +12,6 @@ import iskills.com.presentation.di.activity.navigator.PresenterNavigator;
 public class MemoryPreviewPresenterImpl implements MemoryPreviewPresenter {
 
   private CompositeDisposable disposable = new CompositeDisposable();
-
   private final MemoryPreviewView view;
   private final UseCaseGetMemoryById useCaseGetMemoryById;
   private final PresenterNavigator navigator;
@@ -33,8 +32,7 @@ public class MemoryPreviewPresenterImpl implements MemoryPreviewPresenter {
 
   @Override
   public void loadMemory(Long id) {
-    disposable.add(
-        useCaseGetMemoryById
+    disposable.add(useCaseGetMemoryById
             .getMemoryById(id)
             .subscribeOn(schedulers.mainThread())
             .observeOn(schedulers.uiThread())
