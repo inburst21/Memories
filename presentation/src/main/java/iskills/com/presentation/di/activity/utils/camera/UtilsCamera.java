@@ -11,6 +11,7 @@ import java.io.File;
 import javax.inject.Inject;
 
 import iskills.com.presentation.BuildConfig;
+import iskills.com.presentation.constants.Constants;
 import iskills.com.presentation.di.activity.utils.fileProviders.FileUtilPresenter;
 
 
@@ -20,8 +21,7 @@ import iskills.com.presentation.di.activity.utils.fileProviders.FileUtilPresente
  */
 class UtilsCamera implements PresenterCamera {
 
-    private int captureRequest = 1;
-    private int loadRequest = 2;
+
 
     private final Activity activity;
     private final FileUtilPresenter utilsFile;
@@ -29,7 +29,6 @@ class UtilsCamera implements PresenterCamera {
 
     private File lastPhoto;
     private Uri lastPhotoUri;
-    private boolean savePhotosLocally = true;
 
     @Inject
     UtilsCamera(Activity activity, FileUtilPresenter fileUtilPresenter){
@@ -48,7 +47,7 @@ class UtilsCamera implements PresenterCamera {
 
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         camera.putExtra(MediaStore.EXTRA_OUTPUT, lastPhotoUri);
-        activity.startActivityForResult(camera, captureRequest);
+        activity.startActivityForResult(camera, Constants.CAPTURE_REQUEST);
 
 
     }
@@ -57,12 +56,12 @@ class UtilsCamera implements PresenterCamera {
     @Override
     public void loadGallery(){
         Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        activity.startActivityForResult(i, loadRequest);
+        activity.startActivityForResult(i, Constants.LOAD_REQUEST);
     }
 
     @Override
     public byte[] onPhotoTakenResult() {
-        if(savePhotosLocally) {
+        if(Constants.SAVE_LOCALLY) {
             savePhoto();
         }
 

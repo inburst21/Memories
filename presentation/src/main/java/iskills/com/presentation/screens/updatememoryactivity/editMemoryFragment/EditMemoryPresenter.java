@@ -15,7 +15,7 @@ interface EditMemoryPresenter {
 
     void onLocationChanged(CharSequence charSequence);
 
-    void updateValues(boolean newPhoto, byte[] imageBytes, @Nullable Long imageId);
+    void updateValues(byte[] imageBytes, @Nullable Long imageId);
 
     void onDeleteTapped();
 

@@ -44,22 +44,20 @@ public class EditMemoryFragment extends BaseFragment implements EditMemoryView {
   @BindView(R.id.button_delete_memory)
   ImageButton deleteButton;
 
-  public static String MEMORY_NEW = "memory_new";
   public static String MEMORY_BYTES = "memory_bytes";
   public static String MEMORY_ID = "memory_id";
 
-    @Nullable
+  @Nullable
   @Override
-  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+  public View onCreateView(
+      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_edit_memory, container, false);
   }
 
-  public static EditMemoryFragment newInstance(
-      byte[] byteArrayExtra, long longExtra, boolean booleanExtra) {
+  public static EditMemoryFragment newInstance(byte[] byteArrayExtra, long longExtra) {
     Bundle bundle = new Bundle();
     bundle.putByteArray(MEMORY_BYTES, byteArrayExtra);
     bundle.putLong(MEMORY_ID, longExtra);
-    bundle.putBoolean(MEMORY_NEW, booleanExtra);
 
     EditMemoryFragment viewEditMemory = new EditMemoryFragment();
     viewEditMemory.setArguments(bundle);
@@ -70,12 +68,6 @@ public class EditMemoryFragment extends BaseFragment implements EditMemoryView {
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     unbinder = ButterKnife.bind(this, view);
-    if (getArguments() != null) {
-        boolean isNew = getArguments().getBoolean(MEMORY_NEW);
-        byte[] memoryBytes = getArguments().getByteArray(MEMORY_BYTES);
-        Long memoryID = getArguments().getLong(MEMORY_ID);
-      presenter.updateValues(isNew, memoryBytes, memoryID);
-    }
   }
 
   @OnTextChanged(R.id.input_memory_title)
@@ -115,9 +107,7 @@ public class EditMemoryFragment extends BaseFragment implements EditMemoryView {
 
   @Override
   public void setAddress(String address) {
-    if (getView() != null) {
-      requireActivity().runOnUiThread(() -> inputMemoryLocation.setText(address));
-    }
+    requireActivity().runOnUiThread(() -> inputMemoryLocation.setText(address));
   }
 
   @Override
@@ -143,5 +133,16 @@ public class EditMemoryFragment extends BaseFragment implements EditMemoryView {
   @Override
   public void showDeleteOption() {
     deleteButton.setVisibility(View.VISIBLE);
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+
+    if (getArguments() != null) {
+      byte[] memoryBytes = getArguments().getByteArray(MEMORY_BYTES);
+      Long memoryID = getArguments().getLong(MEMORY_ID);
+      presenter.updateValues(memoryBytes, memoryID);
+    }
   }
 }

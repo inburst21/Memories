@@ -1,6 +1,5 @@
 package iskills.com.presentation.di.activity.utils.activityresult;
 
-import javax.annotation.Nullable;
 
 /**
  * lennyhicks
@@ -13,12 +12,12 @@ public class ActivityResultListener {
         this.listener = listener;
     }
 
-    public void onActivityResult(int requestCode, int resultCode, @Nullable String data){
+    public void onActivityResult(int requestCode, int resultCode, String data){
         if(listener != null)
         listener.onActivityResult(requestCode, resultCode, data);
     }
 
     public interface Listener {
-        void onActivityResult(int requestCode, int resultCode, @Nullable String data);
+        void onActivityResult(int requestCode, int resultCode, String data);
     }
 }

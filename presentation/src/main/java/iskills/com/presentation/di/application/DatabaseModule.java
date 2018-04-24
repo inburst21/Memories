@@ -5,10 +5,10 @@ import android.arch.persistence.room.Room;
 
 import dagger.Module;
 import dagger.Provides;
-import iskills.com.data.MemoryDatabase;
-import iskills.com.data.MemoryDaoImpl;
-import iskills.com.data.MemoryRepositoryImpl;
 import iskills.com.data.MapperImpl;
+import iskills.com.data.MemoryDaoImpl;
+import iskills.com.data.MemoryDatabase;
+import iskills.com.data.MemoryRepositoryImpl;
 import iskills.com.domain.repository.MemoryRepository;
 import iskills.com.presentation.di.scopes.ApplicationScope;
 

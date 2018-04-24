@@ -95,8 +95,8 @@ public class PresenterEditMemory extends BasePresenter<EditMemoryView>
   }
 
   @Override
-  public void updateValues(boolean newPhoto, byte[] imageBytes, @Nullable Long imageId) {
-    if (newPhoto) {
+  public void updateValues(byte[] imageBytes, @Nullable Long imageId) {
+    if (imageBytes != null) {
       memory.memoryDate = presenterDate.formatDate(Calendar.getInstance());
       view.setDate(memory.memoryDate);
       memory.imageBytes = imageBytes;

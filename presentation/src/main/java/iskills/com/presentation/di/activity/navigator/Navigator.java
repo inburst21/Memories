@@ -4,12 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 
 import javax.inject.Inject;
 
+import iskills.com.presentation.R;
 import iskills.com.presentation.di.activity.utils.activityresult.CallbackDeleteDialog;
 import iskills.com.presentation.screens.adapters.AdapterMemoryViewPager;
 import iskills.com.presentation.screens.memoryactivity.MainActivity;
@@ -19,8 +19,8 @@ import iskills.com.presentation.screens.updatememoryactivity.editMemoryFragment.
 
 /** lennyhicks 4/4/18 */
 public class Navigator implements PresenterNavigator {
-  private Context activity;
-  private FragmentManager fragmentManager;
+  private final Context activity;
+  private final FragmentManager fragmentManager;
 
   @Inject
   Navigator(Activity activity, FragmentManager fragmentManager) {
@@ -44,18 +44,8 @@ public class Navigator implements PresenterNavigator {
   }
 
   @Override
-  public void toEditMemoryScreen(boolean newPhoto, byte[] imageBytes, @Nullable Long imageId) {
-    Intent intent = new Intent(activity, UpdateMemoryActivity.class);
-    intent.putExtra(EditMemoryFragment.MEMORY_NEW, newPhoto);
-    intent.putExtra(EditMemoryFragment.MEMORY_BYTES, imageBytes);
-    intent.putExtra(EditMemoryFragment.MEMORY_ID, imageId);
-    activity.startActivity(intent);
-  }
-
-  @Override
   public void toEditMemoryScreen(byte[] imageBytes) {
     Intent intent = new Intent(activity, UpdateMemoryActivity.class);
-    intent.putExtra(EditMemoryFragment.MEMORY_NEW, true);
     intent.putExtra(EditMemoryFragment.MEMORY_BYTES, imageBytes);
     activity.startActivity(intent);
   }
@@ -73,14 +63,14 @@ public class Navigator implements PresenterNavigator {
     bundle.putLong(EditMemoryFragment.MEMORY_ID, id);
     MemoryPreviewDialog dialog = new MemoryPreviewDialog();
     dialog.setArguments(bundle);
-    dialog.show(fragmentManager, "test");
+    dialog.show(fragmentManager, "preview");
   }
 
   @Override
   public void showDeleteConfirmation(CallbackDeleteDialog callbackDeleteDialog) {
     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-    builder.setTitle("Delete");
-    builder.setMessage("Are you sure you want to delete this memory?");
+    builder.setTitle(R.string.delete);
+    builder.setMessage(R.string.delete_memory_confirmation);
     builder.setPositiveButton(
         "Delete",
         (dialog, id) -> {

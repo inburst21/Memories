@@ -12,4 +12,6 @@
     <string name="text_memories">Memories</string>
     <string name="text_map">Map</string>
     <string name="text_close_memory">Close</string>
+    <string name="delete">Delete</string>
+    <string name="delete_memory_confirmation">Are you sure you want to delete this memory?</string>
 </resources>

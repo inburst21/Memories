@@ -16,8 +16,8 @@ class UtilsDate implements PresenterDate {
   private Calendar calendar = Calendar.getInstance();
 
   @Inject
-  UtilsDate(Activity application) {
-    this.activity = application;
+  UtilsDate(Activity activity) {
+    this.activity = activity;
   }
 
   @Override
