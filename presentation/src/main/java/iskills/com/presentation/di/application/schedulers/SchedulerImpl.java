@@ -10,10 +10,10 @@ import io.reactivex.schedulers.Schedulers;
  * lennyhicks
  * 4/9/18
  */
-public class ImplSchedulers implements PresenterScheduler {
+public class SchedulerImpl implements SchedulerPresenter {
 
     @Inject
-    ImplSchedulers(){}
+    SchedulerImpl(){}
 
     public Scheduler uiThread() {
         return AndroidSchedulers.mainThread();

@@ -1,6 +1,6 @@
 package iskills.com.presentation.di.activity.navigator;
 
-import iskills.com.presentation.di.activity.utils.activityresult.CallbackDeleteDialog;
+import iskills.com.presentation.screens.updatememoryactivity.CallbackDeleteDialog;
 
 /**
  * lennyhicks

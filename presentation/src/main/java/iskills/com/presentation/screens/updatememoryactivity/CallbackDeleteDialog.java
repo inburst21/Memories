@@ -1,4 +1,4 @@
-package iskills.com.presentation.di.activity.utils.activityresult;
+package iskills.com.presentation.screens.updatememoryactivity;
 
 /**
  * lennyhicks

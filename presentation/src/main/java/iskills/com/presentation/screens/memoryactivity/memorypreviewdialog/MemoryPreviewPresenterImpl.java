@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import iskills.com.domain.model.Memory;
 import iskills.com.domain.usecases.UseCaseGetMemoryById;
-import iskills.com.presentation.di.application.schedulers.PresenterScheduler;
+import iskills.com.presentation.di.application.schedulers.SchedulerPresenter;
 import iskills.com.presentation.di.activity.navigator.PresenterNavigator;
 
 /** lennyhicks 4/16/18 */
@@ -13,7 +13,7 @@ public class MemoryPreviewPresenterImpl implements MemoryPreviewPresenter {
   private final MemoryPreviewView view;
   private final UseCaseGetMemoryById useCaseGetMemoryById;
   private final PresenterNavigator navigator;
-  private final PresenterScheduler schedulers;
+  private final SchedulerPresenter schedulers;
   private Memory memory;
 
   @Inject
@@ -21,7 +21,7 @@ public class MemoryPreviewPresenterImpl implements MemoryPreviewPresenter {
       MemoryPreviewView view,
       UseCaseGetMemoryById useCaseGetMemoryById,
       PresenterNavigator navigator,
-      PresenterScheduler schedulers) {
+      SchedulerPresenter schedulers) {
     this.view = view;
     this.useCaseGetMemoryById = useCaseGetMemoryById;
     this.navigator = navigator;

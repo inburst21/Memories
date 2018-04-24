@@ -8,9 +8,9 @@ import dagger.Module;
  * 4/3/18
  */
 @Module
-public abstract class ModuleDate {
+public abstract class DateModule {
 
     @Binds
-    abstract PresenterDate presenterDate(UtilsDate utilsDate);
+    abstract DatePresenter presenterDate(DateUtils utilsDate);
 
 }

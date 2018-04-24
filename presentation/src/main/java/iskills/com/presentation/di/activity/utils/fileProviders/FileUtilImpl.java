@@ -26,15 +26,16 @@ import javax.inject.Inject;
  * lennyhicks
  * 4/5/18
  */
-public class ImplFileUtil implements FileUtilPresenter {
+public class FileUtilImpl implements FileUtilPresenter {
 
-    private final Activity application;
+    private final Activity activity;
 
     @Inject
-    public ImplFileUtil(Activity application) {
-        this.application = application;
+    public FileUtilImpl(Activity activity) {
+        this.activity = activity;
     }
 
+    @Override
     public File getImageFile() {
         String timeStamp =
                 new SimpleDateFormat("yyyyMMdd_HHmmss",
@@ -54,7 +55,7 @@ public class ImplFileUtil implements FileUtilPresenter {
         }
         return image;
     }
-
+    @Override
     public byte[] getBytesFromUriString(String uri) {
         try {
             return getBytes(getInputStreamFromUri(Uri.parse(uri)));
@@ -78,7 +79,7 @@ public class ImplFileUtil implements FileUtilPresenter {
 
     private InputStream getInputStreamFromUri(Uri data) {
         try {
-            return application.getContentResolver().openInputStream(data);
+            return activity.getContentResolver().openInputStream(data);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;
@@ -88,6 +89,7 @@ public class ImplFileUtil implements FileUtilPresenter {
     /*
      * Gets the file path of the given Uri.
      */
+    @Override
     @SuppressLint("NewApi")
     public String getPath(String uriString) {
         final boolean needToCheckUri = Build.VERSION.SDK_INT >= 19;
@@ -96,7 +98,7 @@ public class ImplFileUtil implements FileUtilPresenter {
         Uri uri = Uri.parse(uriString);
         // Uri is different in versions after KITKAT (Android 4.4), we need to
         // deal with different Uris.
-        if (needToCheckUri && DocumentsContract.isDocumentUri(application.getApplicationContext(), uri)) {
+        if (needToCheckUri && DocumentsContract.isDocumentUri(activity.getApplicationContext(), uri)) {
             if (isExternalStorageDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
@@ -124,7 +126,7 @@ public class ImplFileUtil implements FileUtilPresenter {
             String[] projection = {MediaStore.Images.Media.DATA};
             Cursor cursor = null;
             try {
-                cursor = application.getContentResolver().query(uri, projection, selection, selectionArgs, null);
+                cursor = activity.getContentResolver().query(uri, projection, selection, selectionArgs, null);
                 int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                 if (cursor.moveToFirst()) {
                     return cursor.getString(column_index);

@@ -17,7 +17,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import dagger.android.support.DaggerAppCompatDialogFragment;
 import iskills.com.presentation.R;
-import iskills.com.presentation.di.activity.utils.android.PresenterAndroid;
+import iskills.com.presentation.di.activity.utils.android.AndroidPresenter;
 import iskills.com.presentation.screens.updatememoryactivity.editMemoryFragment.EditMemoryFragment;
 
 /** lennyhicks 4/16/18 */
@@ -38,7 +38,8 @@ public class MemoryPreviewDialog extends DaggerAppCompatDialogFragment implement
   @BindView(R.id.text_memory_date)
   TextView memoryDate;
 
-  @Inject PresenterAndroid presenterAndroid;
+  @Inject
+  AndroidPresenter androidPresenter;
 
   @Inject MemoryPreviewPresenter presenter;
   private Unbinder unbinder;
@@ -73,7 +74,7 @@ public class MemoryPreviewDialog extends DaggerAppCompatDialogFragment implement
 
   @Override
   public void loadImage(byte[] imageBytes) {
-    imageView.setImageBitmap(presenterAndroid.getBitmapFromByteArray(imageBytes));
+    imageView.setImageBitmap(androidPresenter.getBitmapFromByteArray(imageBytes));
   }
 
   @Override

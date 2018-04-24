@@ -1,7 +1,6 @@
 package iskills.com.presentation.di.activity.navigator;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +9,7 @@ import android.support.v7.app.AlertDialog;
 import javax.inject.Inject;
 
 import iskills.com.presentation.R;
-import iskills.com.presentation.di.activity.utils.activityresult.CallbackDeleteDialog;
+import iskills.com.presentation.screens.updatememoryactivity.CallbackDeleteDialog;
 import iskills.com.presentation.screens.adapters.AdapterMemoryViewPager;
 import iskills.com.presentation.screens.memoryactivity.MainActivity;
 import iskills.com.presentation.screens.memoryactivity.memorypreviewdialog.MemoryPreviewDialog;
@@ -19,7 +18,7 @@ import iskills.com.presentation.screens.updatememoryactivity.editMemoryFragment.
 
 /** lennyhicks 4/4/18 */
 public class Navigator implements PresenterNavigator {
-  private final Context activity;
+  private final Activity activity;
   private final FragmentManager fragmentManager;
 
   @Inject
@@ -29,33 +28,25 @@ public class Navigator implements PresenterNavigator {
   }
 
   @Override
-  public void toMemoriesScreen() {
-    ((MainActivity) activity).getContainer().setCurrentItem(AdapterMemoryViewPager.pageAllMemories);
-  }
+  public void toMemoriesScreen() { ((MainActivity) activity).getContainer().setCurrentItem(AdapterMemoryViewPager.pageAllMemories); }
 
   @Override
-  public void toMapScreen() {
-    ((MainActivity) activity).getContainer().setCurrentItem(AdapterMemoryViewPager.pageMap);
-  }
+  public void toMapScreen() { ((MainActivity) activity).getContainer().setCurrentItem(AdapterMemoryViewPager.pageMap); }
 
   @Override
-  public void toUploadScreen() {
-    ((MainActivity) activity).getContainer().setCurrentItem(AdapterMemoryViewPager.pageAddMemory);
-  }
+  public void toUploadScreen() { ((MainActivity) activity).getContainer().setCurrentItem(AdapterMemoryViewPager.pageAddMemory); }
 
   @Override
   public void toEditMemoryScreen(byte[] imageBytes) {
     Intent intent = new Intent(activity, UpdateMemoryActivity.class);
     intent.putExtra(EditMemoryFragment.MEMORY_BYTES, imageBytes);
-    activity.startActivity(intent);
-  }
+    activity.startActivity(intent); }
 
   @Override
   public void toEditMemoryScreen(Long id) {
     Intent intent = new Intent(activity, UpdateMemoryActivity.class);
     intent.putExtra(EditMemoryFragment.MEMORY_ID, id);
-    activity.startActivity(intent);
-  }
+    activity.startActivity(intent); }
 
   @Override
   public void openPreviewDialog(Long id) {
@@ -63,8 +54,7 @@ public class Navigator implements PresenterNavigator {
     bundle.putLong(EditMemoryFragment.MEMORY_ID, id);
     MemoryPreviewDialog dialog = new MemoryPreviewDialog();
     dialog.setArguments(bundle);
-    dialog.show(fragmentManager, "preview");
-  }
+    dialog.show(fragmentManager, "preview"); }
 
   @Override
   public void showDeleteConfirmation(CallbackDeleteDialog callbackDeleteDialog) {

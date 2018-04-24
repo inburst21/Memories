@@ -9,8 +9,8 @@ import dagger.Module;
  */
 
 @Module
-public abstract class ModuleCamera {
+public abstract class CameraModule {
 
     @Binds
-    abstract PresenterCamera utilsCamera(UtilsCamera camera);
+    abstract CameraPresenter utilsCamera(CameraUtils camera);
 }

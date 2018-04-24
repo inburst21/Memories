@@ -10,18 +10,18 @@ import java.util.Calendar;
 import javax.inject.Inject;
 
 /** lennyhicks 4/5/18 */
-class UtilsDate implements PresenterDate {
+class DateUtils implements DatePresenter {
 
   private final Activity activity;
   private Calendar calendar = Calendar.getInstance();
 
   @Inject
-  UtilsDate(Activity activity) {
+  DateUtils(Activity activity) {
     this.activity = activity;
   }
 
   @Override
-  public void openDatePicker(PresenterDate.Listener listener) {
+  public void openDatePicker(DatePresenter.Listener listener) {
     DatePickerDialog mDatePicker =
         new DatePickerDialog(
             activity,

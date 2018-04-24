@@ -3,9 +3,11 @@ package iskills.com.presentation.di.activity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
-import iskills.com.presentation.di.activity.utils.android.ModuleAndroid;
-import iskills.com.presentation.di.activity.utils.date.ModuleDate;
-import iskills.com.presentation.di.activity.utils.location.ModuleLocation;
+import iskills.com.presentation.di.activity.utils.android.AndroidModule;
+import iskills.com.presentation.di.activity.utils.camera.CameraModule;
+import iskills.com.presentation.di.activity.utils.date.DateModule;
+import iskills.com.presentation.di.activity.utils.fileProviders.FileUtilModule;
+import iskills.com.presentation.di.activity.utils.location.LocationModule;
 import iskills.com.presentation.di.scopes.ActivityScope;
 import iskills.com.presentation.di.activity.navigator.ModuleNavigator;
 import iskills.com.presentation.screens.memoryactivity.MainActivity;
@@ -18,7 +20,13 @@ import iskills.com.presentation.screens.updatememoryactivity.UpdateMemoryModule;
  * lennyhicks
  * 4/15/18
  */
-@Module(includes = {ModuleAndroid.class, ModuleLocation.class, ModuleDate.class, ModuleNavigator.class})
+@Module(includes = {
+        AndroidModule.class,
+        LocationModule.class,
+        DateModule.class,
+        ModuleNavigator.class,
+        CameraModule.class,
+        FileUtilModule.class})
 public abstract class PresentationModule {
 
     @ActivityScope

@@ -5,7 +5,7 @@ package iskills.com.presentation.di.activity.utils.location;
  * 4/1/18
  */
 
-public interface PresenterLocation  {
+public interface LocationPresenter {
     String getAddress();
 
     void searchForLocation(CharSequence charSequence);

@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
  * 4/15/18
  */
 
-public interface PresenterAndroid {
-
+public interface AndroidPresenter {
     Bitmap getBitmapFromByteArray(byte[] imageBytes);
 }

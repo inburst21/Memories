@@ -19,21 +19,17 @@ import iskills.com.presentation.di.activity.utils.fileProviders.FileUtilPresente
  * lennyhicks
  * 4/5/18
  */
-class UtilsCamera implements PresenterCamera {
-
-
+class CameraUtils implements CameraPresenter {
 
     private final Activity activity;
     private final FileUtilPresenter utilsFile;
-
-
     private File lastPhoto;
     private Uri lastPhotoUri;
 
     @Inject
-    UtilsCamera(Activity activity, FileUtilPresenter fileUtilPresenter){
+    CameraUtils(Activity activity, FileUtilPresenter utilsFile){
         this.activity = activity;
-        this.utilsFile = fileUtilPresenter;
+        this.utilsFile = utilsFile;
     }
 
     @Override
@@ -43,13 +39,9 @@ class UtilsCamera implements PresenterCamera {
         lastPhotoUri = FileProvider.getUriForFile(activity,
                 BuildConfig.APPLICATION_ID + ".provider",
                 lastPhoto.getAbsoluteFile());
-
-
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         camera.putExtra(MediaStore.EXTRA_OUTPUT, lastPhotoUri);
         activity.startActivityForResult(camera, Constants.CAPTURE_REQUEST);
-
-
     }
 
 
@@ -61,10 +53,7 @@ class UtilsCamera implements PresenterCamera {
 
     @Override
     public byte[] onPhotoTakenResult() {
-        if(Constants.SAVE_LOCALLY) {
-            savePhoto();
-        }
-
+        if(Constants.SAVE_LOCALLY) { savePhoto(); }
         return utilsFile.getBytesFromUriString(utilsFile.getPath(Uri.fromFile(lastPhoto).toString()));
     }
 

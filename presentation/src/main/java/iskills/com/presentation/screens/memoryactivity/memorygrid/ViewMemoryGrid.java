@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import iskills.com.domain.model.Memory;
 import iskills.com.presentation.R;
-import iskills.com.presentation.screens.adapters.AdapterMemoryGrid;
+import iskills.com.presentation.screens.adapters.MemoryGridAdapter;
 import iskills.com.presentation.screens.common.fragments.BaseFragment;
 
 /** lennyhicks 4/1/18 */
@@ -24,7 +24,7 @@ public class ViewMemoryGrid extends BaseFragment implements MemoryGridView {
 
   @Inject protected MemoryGridPresenter presenterGetAllMemories;
 
-  @Inject protected AdapterMemoryGrid adapterMemoryGrid;
+  @Inject protected MemoryGridAdapter memoryGridAdapter;
 
   @BindView(R.id.recycler_view)
   protected RecyclerView recyclerView;
@@ -40,14 +40,14 @@ public class ViewMemoryGrid extends BaseFragment implements MemoryGridView {
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     unbinder = ButterKnife.bind(this, view);
-    recyclerView.setAdapter(adapterMemoryGrid);
+    recyclerView.setAdapter(memoryGridAdapter);
     recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
     presenterGetAllMemories.getAllMemories();
   }
 
   @Override
   public void updateList(List<Memory> memoryList) {
-    adapterMemoryGrid.getPresenterMemoryGrid().updateList(memoryList);
-    adapterMemoryGrid.notifyDataSetChanged();
+    memoryGridAdapter.getPresenterMemoryGrid().updateList(memoryList);
+    memoryGridAdapter.notifyDataSetChanged();
   }
 }

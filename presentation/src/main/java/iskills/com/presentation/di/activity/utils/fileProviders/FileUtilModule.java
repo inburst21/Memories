@@ -8,9 +8,9 @@ import dagger.Module;
  * 4/5/18
  */
 @Module
-public abstract class ModuleFileUtils {
+public abstract class FileUtilModule {
 
     @Binds
-    abstract FileUtilPresenter fileUtilPresenter(ImplFileUtil implFileUtil);
+    abstract FileUtilPresenter fileUtilPresenter(FileUtilImpl fileUtilImpl);
 
 }

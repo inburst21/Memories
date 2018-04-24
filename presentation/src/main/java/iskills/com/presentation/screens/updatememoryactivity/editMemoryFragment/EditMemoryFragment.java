@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import iskills.com.presentation.R;
-import iskills.com.presentation.di.activity.utils.android.PresenterAndroid;
+import iskills.com.presentation.di.activity.utils.android.AndroidPresenter;
 import iskills.com.presentation.screens.common.fragments.BaseFragment;
 
 /** lennyhicks 4/5/18 */
@@ -24,7 +24,7 @@ public class EditMemoryFragment extends BaseFragment implements EditMemoryView {
 
   @Inject public EditMemoryPresenter presenter;
 
-  @Inject public PresenterAndroid utilsAndroid;
+  @Inject public AndroidPresenter utilsAndroid;
 
   @BindView(R.id.image_view)
   ImageView imageView;

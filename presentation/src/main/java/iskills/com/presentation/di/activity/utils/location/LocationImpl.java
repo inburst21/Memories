@@ -24,7 +24,7 @@ import javax.inject.Inject;
  * lennyhicks
  * 3/31/18
  */
-class ProviderLocation implements PresenterLocation, LocationListener {
+class LocationImpl implements LocationPresenter, LocationListener {
     private Activity activity;
     private Location currentLocation;
     private Address currentAddress;
@@ -39,7 +39,7 @@ class ProviderLocation implements PresenterLocation, LocationListener {
 
 
     @Inject
-    ProviderLocation(Activity mainActivity) {
+    LocationImpl(Activity mainActivity) {
         this.activity = mainActivity;
     }
 
@@ -122,6 +122,21 @@ class ProviderLocation implements PresenterLocation, LocationListener {
         updateAddress();
     }
 
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
+    }
+
     private void updateAddress() {
         try {
             if (Geocoder.isPresent()) {
@@ -143,20 +158,5 @@ class ProviderLocation implements PresenterLocation, LocationListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
     }
 }

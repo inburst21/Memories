@@ -13,6 +13,6 @@ public abstract class SchedulerModule {
 
     @ApplicationScope
     @Binds
-    abstract PresenterScheduler getSchedulers(ImplSchedulers implSchedulers);
+    abstract SchedulerPresenter getSchedulers(SchedulerImpl schedulerImpl);
 
 }

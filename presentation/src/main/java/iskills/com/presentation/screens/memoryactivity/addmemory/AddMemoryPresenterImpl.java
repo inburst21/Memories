@@ -5,40 +5,40 @@ import javax.inject.Inject;
 import iskills.com.presentation.constants.Constants;
 import iskills.com.presentation.di.activity.navigator.PresenterNavigator;
 import iskills.com.presentation.di.activity.utils.activityresult.ActivityResultListener;
-import iskills.com.presentation.di.activity.utils.camera.PresenterCamera;
+import iskills.com.presentation.di.activity.utils.camera.CameraPresenter;
 import iskills.com.presentation.screens.common.BasePresenter;
 
 /** lennyhicks 3/30/18 */
 public class AddMemoryPresenterImpl extends BasePresenter<AddMemoryView>
     implements AddMemoryPresenter, ActivityResultListener.Listener {
 
-  private final PresenterCamera presenterCamera;
+  private final CameraPresenter cameraPresenter;
   private final PresenterNavigator navigator;
 
   @Inject
   AddMemoryPresenterImpl(
       AddMemoryView view,
       PresenterNavigator navigator,
-      PresenterCamera presenterCamera,
+      CameraPresenter cameraPresenter,
       ActivityResultListener activityResultListener) {
     super(view);
     this.navigator = navigator;
-    this.presenterCamera = presenterCamera;
+    this.cameraPresenter = cameraPresenter;
     activityResultListener.listen(this);
   }
 
   @Override
   public void onCaptureClicked() {
-    presenterCamera.openCamera();
+    cameraPresenter.openCamera();
   }
 
   @Override
   public void onLoadPhotoTapped() {
-    presenterCamera.loadGallery();
+    cameraPresenter.loadGallery();
   }
 
   private void onLoadPhotoResult(String photoUri) {
-    navigator.toEditMemoryScreen(presenterCamera.getImageBytes(photoUri));
+    navigator.toEditMemoryScreen(cameraPresenter.getImageBytes(photoUri));
   }
 
   @Override
@@ -51,6 +51,6 @@ public class AddMemoryPresenterImpl extends BasePresenter<AddMemoryView>
   }
 
   private void onPhotoTaken() {
-    navigator.toEditMemoryScreen(presenterCamera.onPhotoTakenResult());
+    navigator.toEditMemoryScreen(cameraPresenter.onPhotoTakenResult());
   }
 }

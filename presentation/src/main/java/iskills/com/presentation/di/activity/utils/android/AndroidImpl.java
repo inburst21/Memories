@@ -9,10 +9,10 @@ import javax.inject.Inject;
  * lennyhicks
  * 4/15/18
  */
-public class ImplAndroid implements PresenterAndroid {
+public class AndroidImpl implements AndroidPresenter {
 
     @Inject
-    public ImplAndroid() {
+    public AndroidImpl() {
     }
 
     @Override

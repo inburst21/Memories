@@ -6,7 +6,7 @@ import java.util.Calendar;
  * lennyhicks
  * 4/3/18
  */
-public interface PresenterDate {
+public interface DatePresenter {
 
     void openDatePicker(Listener listener);
     String formatDate(Calendar dateFromDatePicker);

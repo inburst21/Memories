@@ -8,9 +8,9 @@ import dagger.Module;
  * 3/31/18
  */
 @Module
-public abstract class ModuleLocation {
+public abstract class LocationModule {
 
     @Binds
-    abstract PresenterLocation presenterLocation(ProviderLocation providerLocation);
+    abstract LocationPresenter presenterLocation(LocationImpl locationProvider);
 
 }

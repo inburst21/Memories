@@ -14,12 +14,12 @@ import iskills.com.presentation.screens.memoryactivity.memorygrid.MemoryGridAdap
  * lennyhicks
  * 4/5/18
  */
-public class AdapterMemoryGrid extends RecyclerView.Adapter<MemoryHolderFragment> {
+public class MemoryGridAdapter extends RecyclerView.Adapter<MemoryHolderFragment> {
 
     private MemoryGridAdapterPresenter presenterMemoryGrid;
 
     @Inject
-    public AdapterMemoryGrid(MemoryGridAdapterPresenter presenterMemoryGrid) {
+    public MemoryGridAdapter(MemoryGridAdapterPresenter presenterMemoryGrid) {
         this.presenterMemoryGrid = presenterMemoryGrid;
     }
 

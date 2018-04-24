@@ -10,28 +10,28 @@ import iskills.com.domain.model.Memory;
 import iskills.com.domain.usecases.UseCaseAddOrUpdateMemory;
 import iskills.com.domain.usecases.UseCaseDeleteMemory;
 import iskills.com.domain.usecases.UseCaseGetMemoryById;
-import iskills.com.presentation.di.activity.utils.date.PresenterDate;
-import iskills.com.presentation.di.activity.utils.location.PresenterLocation;
-import iskills.com.presentation.di.application.schedulers.PresenterScheduler;
-import iskills.com.presentation.di.activity.utils.activityresult.CallbackDeleteDialog;
+import iskills.com.presentation.di.activity.utils.date.DatePresenter;
+import iskills.com.presentation.di.activity.utils.location.LocationPresenter;
+import iskills.com.presentation.di.application.schedulers.SchedulerPresenter;
+import iskills.com.presentation.screens.updatememoryactivity.CallbackDeleteDialog;
 import iskills.com.presentation.di.activity.navigator.PresenterNavigator;
 import iskills.com.presentation.screens.common.BasePresenter;
 
 /** lennyhicks 4/5/18 */
 public class PresenterEditMemory extends BasePresenter<EditMemoryView>
     implements EditMemoryPresenter,
-        PresenterLocation.Listener,
-        PresenterDate.Listener,
+        LocationPresenter.Listener,
+        DatePresenter.Listener,
         CallbackDeleteDialog {
 
   private final UseCaseAddOrUpdateMemory useCaseUpdateMemory;
   private final UseCaseDeleteMemory useCaseDeleteMemory;
   private final UseCaseGetMemoryById useCaseGetMemoryById;
 
-  private final PresenterDate presenterDate;
-  private final PresenterLocation presenterLocation;
+  private final DatePresenter datePresenter;
+  private final LocationPresenter locationPresenter;
   private final PresenterNavigator presenterNavigator;
-  private final PresenterScheduler schedulers;
+  private final SchedulerPresenter schedulers;
 
   private Memory memory = new Memory();
 
@@ -41,18 +41,18 @@ public class PresenterEditMemory extends BasePresenter<EditMemoryView>
       UseCaseAddOrUpdateMemory useCaseUpdateMemory,
       UseCaseGetMemoryById useCaseGetMemoryById,
       UseCaseDeleteMemory useCaseDeleteMemory,
-      PresenterDate presenterDate,
-      PresenterLocation presenterLocation,
-      PresenterScheduler schedulers,
+      DatePresenter datePresenter,
+      LocationPresenter locationPresenter,
+      SchedulerPresenter schedulers,
       PresenterNavigator presenterNavigator) {
     super(view);
     this.useCaseUpdateMemory = useCaseUpdateMemory;
     this.useCaseGetMemoryById = useCaseGetMemoryById;
     this.useCaseDeleteMemory = useCaseDeleteMemory;
-    this.presenterDate = presenterDate;
-    this.presenterLocation = presenterLocation;
+    this.datePresenter = datePresenter;
+    this.locationPresenter = locationPresenter;
     this.presenterNavigator = presenterNavigator;
-    this.presenterLocation.listen(this);
+    this.locationPresenter.listen(this);
     this.schedulers = schedulers;
   }
 
@@ -83,7 +83,7 @@ public class PresenterEditMemory extends BasePresenter<EditMemoryView>
 
   @Override
   public void onDateTapped() {
-    presenterDate.openDatePicker(this);
+    datePresenter.openDatePicker(this);
   }
 
   @Override
@@ -91,17 +91,17 @@ public class PresenterEditMemory extends BasePresenter<EditMemoryView>
     memory.address = charSequence.toString();
     if (!charSequence.toString().isEmpty() || charSequence.length() > 3)
       if (!charSequence.toString().equals(memory.address))
-        new Thread(() -> presenterLocation.searchForLocation(charSequence)).start();
+        new Thread(() -> locationPresenter.searchForLocation(charSequence)).start();
   }
 
   @Override
   public void updateValues(byte[] imageBytes, @Nullable Long imageId) {
     if (imageBytes != null) {
-      memory.memoryDate = presenterDate.formatDate(Calendar.getInstance());
+      memory.memoryDate = datePresenter.formatDate(Calendar.getInstance());
       view.setDate(memory.memoryDate);
       memory.imageBytes = imageBytes;
       view.loadImage(memory.imageBytes);
-      presenterLocation.listen(this);
+      locationPresenter.listen(this);
     } else {
       addDisposable(
           useCaseGetMemoryById

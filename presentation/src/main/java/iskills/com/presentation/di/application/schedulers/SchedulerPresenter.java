@@ -6,7 +6,7 @@ import io.reactivex.Scheduler;
  * lennyhicks
  * 4/15/18
  */
-public interface PresenterScheduler {
+public interface SchedulerPresenter {
 
     Scheduler uiThread();
 

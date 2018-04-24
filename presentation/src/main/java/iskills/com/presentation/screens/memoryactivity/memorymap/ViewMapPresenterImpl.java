@@ -6,7 +6,7 @@ import io.reactivex.Flowable;
 import iskills.com.domain.model.Memory;
 import iskills.com.domain.usecases.UseCaseGetAllMemories;
 import iskills.com.domain.validators.MapMemoryValidator;
-import iskills.com.presentation.di.application.schedulers.PresenterScheduler;
+import iskills.com.presentation.di.application.schedulers.SchedulerPresenter;
 import iskills.com.presentation.di.activity.navigator.PresenterNavigator;
 import iskills.com.presentation.screens.common.BasePresenter;
 
@@ -15,7 +15,7 @@ public class ViewMapPresenterImpl extends BasePresenter<MemoryMapView>
     implements MemoryMapPresenter {
 
   private final UseCaseGetAllMemories useCaseGetAllMemories;
-  private final PresenterScheduler schedulers;
+  private final SchedulerPresenter schedulers;
   private final PresenterNavigator presenterNavigator;
   private final MapMemoryValidator mapMemoryValidator;
 
@@ -23,7 +23,7 @@ public class ViewMapPresenterImpl extends BasePresenter<MemoryMapView>
   ViewMapPresenterImpl(
       MemoryMapView view,
       UseCaseGetAllMemories useCaseGetAllMemories,
-      PresenterScheduler schedulers,
+      SchedulerPresenter schedulers,
       PresenterNavigator presenterNavigator,
       MapMemoryValidator mapMemoryValidator) {
     super(view);
