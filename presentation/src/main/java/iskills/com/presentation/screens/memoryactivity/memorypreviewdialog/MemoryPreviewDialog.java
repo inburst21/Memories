@@ -58,7 +58,7 @@ public class MemoryPreviewDialog extends DaggerAppCompatDialogFragment implement
     super.onViewCreated(view, savedInstanceState);
     unbinder = ButterKnife.bind(this, view);
     if (getArguments() != null) {
-      presenter.showImage(getArguments().getLong(EditMemoryFragment.MEMORY_ID));
+      presenter.loadMemory(getArguments().getLong(EditMemoryFragment.MEMORY_ID));
     }
   }
 

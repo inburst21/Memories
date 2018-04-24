@@ -15,10 +15,12 @@ public class SchedulerImpl implements SchedulerPresenter {
     @Inject
     SchedulerImpl(){}
 
+    @Override
     public Scheduler uiThread() {
         return AndroidSchedulers.mainThread();
     }
 
+    @Override
     public Scheduler mainThread() {
         return Schedulers.io();
     }

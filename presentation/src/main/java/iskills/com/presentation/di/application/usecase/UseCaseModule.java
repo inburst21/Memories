@@ -17,13 +17,13 @@ import iskills.com.domain.validators.MemoryValidator;
 public class UseCaseModule {
 
     @Provides
-    public UseCaseGetAllMemories getAllMemories(MemoryRepository memoryRepository) {
-        return new UseCaseGetAllMemories(memoryRepository);
+    public UseCaseAddOrUpdateMemory addOrUpdateMemory(MemoryRepository memoryRepository, MemoryValidator memoryValidator) {
+        return new UseCaseAddOrUpdateMemory(memoryRepository, memoryValidator);
     }
 
     @Provides
-    public UseCaseAddOrUpdateMemory addOrUpdateMemory(MemoryRepository memoryRepository, MemoryValidator memoryValidator) {
-        return new UseCaseAddOrUpdateMemory(memoryRepository, memoryValidator);
+    public UseCaseGetAllMemories getAllMemories(MemoryRepository memoryRepository) {
+        return new UseCaseGetAllMemories(memoryRepository);
     }
 
     @Provides

@@ -18,8 +18,7 @@ public class DatabaseModule {
   @ApplicationScope
   @Provides
   MemoryDatabase providesImageDatabase(Application application) {
-    return Room.databaseBuilder(application, MemoryDatabase.class, "imagedb")
-        .fallbackToDestructiveMigration()
+    return Room.databaseBuilder(application, MemoryDatabase.class, "memoriesdb")
         .build();
   }
 
