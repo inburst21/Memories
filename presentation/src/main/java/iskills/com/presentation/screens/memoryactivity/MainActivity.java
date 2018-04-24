@@ -11,7 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import iskills.com.presentation.R;
 import iskills.com.presentation.di.activity.utils.activityresult.ActivityResultListener;
-import iskills.com.presentation.screens.adapters.AdapterMemoryViewPager;
+import iskills.com.presentation.screens.adapters.MemoryViewPagerAdapter;
 import iskills.com.presentation.screens.common.activities.BaseActivity;
 
 public class MainActivity extends BaseActivity {
@@ -19,7 +19,7 @@ public class MainActivity extends BaseActivity {
   @BindView(R.id.container)
   ViewPager container;
 
-  @Inject public AdapterMemoryViewPager viewPager;
+  @Inject public MemoryViewPagerAdapter viewPager;
 
   @Inject ActivityResultListener listener;
 

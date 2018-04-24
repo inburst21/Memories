@@ -11,10 +11,10 @@ import butterknife.ButterKnife;
 import iskills.com.presentation.R;
 
 /**
- * lennyhicks
+ * lennyhicks$
  * 4/5/18
  */
-public class MemoryHolderFragment extends RecyclerView.ViewHolder implements MemoryHolderView {
+public class MemoryHolderFragment extends RecyclerView.ViewHolder implements MemoryViewHolder {
 
     @BindView(R.id.item_image)
     ImageView memoryImageView;

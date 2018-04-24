@@ -53,7 +53,7 @@ public class ViewMapPresenterImpl extends BasePresenter<MemoryMapView>
     if (mapMemoryValidator.validate(memory)) {
       view.addMemory(memory.id, memory.title, memory.comment, memory.lat, memory.lng);
     } else {
-      view.showError("MemoryHolderView was missing required components");
+      view.showError("MemoryViewHolder was missing required components");
     }
   }
 

@@ -22,7 +22,7 @@ public abstract class BaseActivity extends DaggerAppCompatActivity {
                     .getPackageInfo(context.getPackageName(), PackageManager.GET_PERMISSIONS)
                     .requestedPermissions;
         } catch (PackageManager.NameNotFoundException e) {
-            throw new RuntimeException("This should have never happened.", e); // I'd return null and Log.wtf(...) in production
+            throw new RuntimeException("This should have never happened.", e);
         }
     }
 

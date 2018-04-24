@@ -40,7 +40,7 @@ public class MemoryGridAdapter extends RecyclerView.Adapter<MemoryHolderFragment
         return presenterMemoryGrid.getMemoryCount();
     }
 
-    public MemoryGridAdapterPresenter getPresenterMemoryGrid() {
+    public MemoryGridAdapterPresenter getMemoryGridPresenter() {
         return presenterMemoryGrid;
     }
 }

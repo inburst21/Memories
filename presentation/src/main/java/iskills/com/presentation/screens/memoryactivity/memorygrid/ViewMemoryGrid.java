@@ -47,7 +47,7 @@ public class ViewMemoryGrid extends BaseFragment implements MemoryGridView {
 
   @Override
   public void updateList(List<Memory> memoryList) {
-    memoryGridAdapter.getPresenterMemoryGrid().updateList(memoryList);
+    memoryGridAdapter.getMemoryGridPresenter().updateList(memoryList);
     memoryGridAdapter.notifyDataSetChanged();
   }
 }

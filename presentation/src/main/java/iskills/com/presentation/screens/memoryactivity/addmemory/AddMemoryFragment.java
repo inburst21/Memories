@@ -17,7 +17,7 @@ import iskills.com.presentation.screens.common.fragments.BaseFragment;
  * lennyhicks
  * 3/30/18
  */
-public class AddMemoryFragment extends BaseFragment implements AddMemoryView{
+public class AddMemoryFragment extends BaseFragment implements AddMemoryView {
 
     @Inject
     protected AddMemoryPresenter presenterAddMemory;

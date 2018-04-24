@@ -9,8 +9,8 @@ import android.support.v7.app.AlertDialog;
 import javax.inject.Inject;
 
 import iskills.com.presentation.R;
+import iskills.com.presentation.screens.adapters.MemoryViewPagerAdapter;
 import iskills.com.presentation.screens.updatememoryactivity.CallbackDeleteDialog;
-import iskills.com.presentation.screens.adapters.AdapterMemoryViewPager;
 import iskills.com.presentation.screens.memoryactivity.MainActivity;
 import iskills.com.presentation.screens.memoryactivity.memorypreviewdialog.MemoryPreviewDialog;
 import iskills.com.presentation.screens.updatememoryactivity.UpdateMemoryActivity;
@@ -28,13 +28,13 @@ public class Navigator implements PresenterNavigator {
   }
 
   @Override
-  public void toMemoriesScreen() { ((MainActivity) activity).getContainer().setCurrentItem(AdapterMemoryViewPager.pageAllMemories); }
+  public void toMemoriesScreen() { ((MainActivity) activity).getContainer().setCurrentItem(MemoryViewPagerAdapter.pageAllMemories); }
 
   @Override
-  public void toMapScreen() { ((MainActivity) activity).getContainer().setCurrentItem(AdapterMemoryViewPager.pageMap); }
+  public void toMapScreen() { ((MainActivity) activity).getContainer().setCurrentItem(MemoryViewPagerAdapter.pageMap); }
 
   @Override
-  public void toUploadScreen() { ((MainActivity) activity).getContainer().setCurrentItem(AdapterMemoryViewPager.pageAddMemory); }
+  public void toUploadScreen() { ((MainActivity) activity).getContainer().setCurrentItem(MemoryViewPagerAdapter.pageAddMemory); }
 
   @Override
   public void toEditMemoryScreen(byte[] imageBytes) {

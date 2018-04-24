@@ -11,7 +11,7 @@ import iskills.com.presentation.screens.memoryactivity.memorygrid.ViewMemoryGrid
 import iskills.com.presentation.screens.memoryactivity.memorymap.MemoryMapFragment;
 
 /** lennyhicks 3/30/18 */
-public class AdapterMemoryViewPager extends FragmentStatePagerAdapter {
+public class MemoryViewPagerAdapter extends FragmentStatePagerAdapter {
 
   private final AddMemoryFragment addMemoryView = new AddMemoryFragment();
   public static final int pageAddMemory = 0;
@@ -23,7 +23,7 @@ public class AdapterMemoryViewPager extends FragmentStatePagerAdapter {
   public static final int pageMap = 2;
 
   @Inject
-  public AdapterMemoryViewPager(FragmentManager fm) {
+  public MemoryViewPagerAdapter(FragmentManager fm) {
     super(fm);
   }
 
