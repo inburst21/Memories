@@ -18,7 +18,7 @@ import iskills.com.presentation.di.activity.navigator.PresenterNavigator;
 import iskills.com.presentation.screens.common.BasePresenter;
 
 /** lennyhicks 4/5/18 */
-public class PresenterEditMemory extends BasePresenter<EditMemoryView>
+public class EditMemoryPresenterImpl extends BasePresenter<EditMemoryView>
     implements EditMemoryPresenter,
         LocationPresenter.Listener,
         DatePresenter.Listener,
@@ -36,7 +36,7 @@ public class PresenterEditMemory extends BasePresenter<EditMemoryView>
   private Memory memory = new Memory();
 
   @Inject
-  PresenterEditMemory(
+  EditMemoryPresenterImpl(
       EditMemoryView view,
       UseCaseAddOrUpdateMemory useCaseUpdateMemory,
       UseCaseGetMemoryById useCaseGetMemoryById,

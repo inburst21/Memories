@@ -1,7 +1,7 @@
 package iskills.com.presentation.screens.updatememoryactivity;
 
 /**
- * lennyhicks
+ * lennyhicks$
  * 4/16/18
  */
 public interface CallbackDeleteDialog {

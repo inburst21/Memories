@@ -14,5 +14,5 @@ public abstract class EditMemoryModule {
     abstract EditMemoryView editMemoryView(EditMemoryFragment viewEditMemory);
 
     @Binds
-    abstract EditMemoryPresenter presenterEditMemory(PresenterEditMemory presenterEditMemory);
+    abstract EditMemoryPresenter presenterEditMemory(EditMemoryPresenterImpl editMemoryPresenterImpl);
 }
